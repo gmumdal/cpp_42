@@ -73,7 +73,7 @@ bool	Account::makeWithdrawal(int withdrawal)
 	p_amount = _amount;
 	_nbWithdrawals = 1;
 	Account::_totalNbWithdrawals += 1;
-	Account::_totalAmount -= withdrawal
+	Account::_totalAmount -= withdrawal;
 	_amount = _amount - withdrawal;
 	std::cout << "index:" << _accountIndex << ";p_amount:"
 		<< p_amount << ";withdrawal:" << withdrawal << ";amount:"
