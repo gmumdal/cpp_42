@@ -53,6 +53,8 @@ void	PhoneBook::print_book()
 		std::cout << "number     : " << contact[choose].get_number() << std::endl;
 		std::cout << "secret     : " << contact[choose].get_secret() << std::endl;
 	}
+	else
+		std::cout << "wrong index" << std::endl;
 }
 
 std::string	PhoneBook::ten_sentence(std::string s)
