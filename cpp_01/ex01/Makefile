@@ -1,5 +1,5 @@
-NAME = BraiiiiiiinnnzzzZ
-SRCS = main.cpp Zombie.cpp newZombie.cpp randomChump.cpp
+NAME = moar_brainz
+SRCS = main.cpp Zombie.cpp ZombieHorde.cpp
 INCS = Zombie.hpp
 INC_DIR = -I ./
 OBJ_DIR = objs
