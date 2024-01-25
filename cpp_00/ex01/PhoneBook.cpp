@@ -1,10 +1,7 @@
 
 #include "PhoneBook.hpp"
 
-PhoneBook::PhoneBook() : index(0)
-{
-
-}
+PhoneBook::PhoneBook() : index(0) {}
 
 void	PhoneBook::add_book()
 {
@@ -63,7 +60,7 @@ void	PhoneBook::print_book()
 	int			size;
 	std::string	choose;
 
-	if (index > 9)
+	if (index > 8)
 		size = 8;
 	else
 		size = index;
@@ -80,7 +77,7 @@ void	PhoneBook::print_book()
 	}
 	std::cout << "select index : ";
 	std::getline(std::cin, choose);
-	if (choose[0] < '0' || choose[0] > '9' || choose[1] != 0 || size == 0)
+	if (choose[0] < '0' || choose[0] >= size + '0' || choose[1] != 0 || size == 0)
 		std::cout << "wrong index" << std::endl;
 	else if (choose[0] - '0' < size)
 	{
