@@ -33,7 +33,7 @@ int	main(int ac, char **av)
 			line.erase(found, strlen(av[2]));
 			for (size_t i = 0; i < strlen(av[3]); i++)
 				line.insert(found + i, 1, av[3][i]);
-			found++;
+			found += strlen(av[3]);
 		}
 		output << line << std::endl;
 	}
