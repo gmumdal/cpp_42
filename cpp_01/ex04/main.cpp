@@ -1,6 +1,7 @@
 
 #include <iostream>
 #include <fstream>
+#include <sstream>
 #include <string>
 
 int	main(int ac, char **av)
@@ -21,22 +22,22 @@ int	main(int ac, char **av)
 		std::cerr << "error" << std::endl;
 		return (1);
 	}
-	std::string	line;
-	while (std::getline(input, line))
+	std::stringstream	buffer;
+	buffer << input.rdbuf();
+	std::string	line = buffer.str();
+	std::cout << line;
+	size_t	found = 0;
+	while (42)
 	{
-		size_t	found = 0;
-		while (42)
-		{
-			found = line.find(av[2], found);
-			if (found == std::string::npos)
-				break ;
-			line.erase(found, strlen(av[2]));
-			for (size_t i = 0; i < strlen(av[3]); i++)
-				line.insert(found + i, 1, av[3][i]);
-			found += strlen(av[3]);
-		}
-		output << line << std::endl;
+		found = line.find(av[2], found);
+		if (found == std::string::npos)
+			break ;
+		line.erase(found, strlen(av[2]));
+		for (size_t i = 0; i < strlen(av[3]); i++)
+			line.insert(found + i, 1, av[3][i]);
+		found += strlen(av[3]);
 	}
+	output << line << std::endl;
 	input.close();
 	output.close();
 	return (0);
