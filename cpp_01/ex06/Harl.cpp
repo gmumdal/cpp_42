@@ -50,12 +50,15 @@ void	Harl::complain(std::string level)
 		case 0:
 			(this->*func[0])();
 			std::cout << std::endl;
+			__attribute__((fallthrough));
 		case 1:
 			(this->*func[1])();
 			std::cout << std::endl;
+			__attribute__((fallthrough));
 		case 2:
 			(this->*func[2])();
 			std::cout << std::endl;
+			__attribute__((fallthrough));
 		case 3:
 			(this->*func[3])();
 			break ;

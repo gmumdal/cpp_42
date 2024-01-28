@@ -2,7 +2,7 @@ NAME = sed
 SRCS = main.cpp
 OBJ_DIR = objs
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
-CPP = g++ -std=c++98
+CPP = c++ -std=c++98
 CFLAGS = -Wall -Wextra -Werror
 
 all : $(NAME)

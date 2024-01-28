@@ -10,6 +10,8 @@ int	main(int ac, char **av)
 		return (1);
 
 	std::string	file = av[1];
+	std::string	s1 = av[2];
+	std::string	s2 = av[3];
 	std::ifstream	input(file);
 	if (!input.is_open())
 	{
@@ -31,15 +33,15 @@ int	main(int ac, char **av)
 	size_t	found = 0;
 	while (42)
 	{
-		if (!strlen(av[2]))
+		if (!s1.size())
 			break ;
-		found = str.find(av[2], found);
+		found = str.find(s1, found);
 		if (found == std::string::npos)
 			break ;
-		str.erase(found, strlen(av[2]));
-		for (size_t i = 0; i < strlen(av[3]); i++)
-			str.insert(found + i, 1, av[3][i]);
-		found += strlen(av[3]);
+		str.erase(found, s1.size());
+		for (size_t i = 0; i < s2.size(); i++)
+			str.insert(found + i, 1, s2[i]);
+		found += s2.size();
 	}
 	output << str;
 	input.close();
