@@ -12,7 +12,7 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	$(CPP) $(CFLAGS) -o $@ $^ $(INC_DIR)
 
-$(OBJ_DIR)/%.o : %.cpp
+$(OBJ_DIR)/%.o : %.cpp $(INCS)
 	@mkdir -p $(OBJ_DIR)
 	$(CPP) $(CFLAGS) -c -o $@ $< $(INC_DIR)
 

@@ -3,8 +3,8 @@
 
 int	main(void)
 {
-	Zombie	zombie("zombie");
-	Zombie	*newzombie = newZombie("newzombie");
+	Zombie	zombie("Foo");
+	Zombie	*newzombie = newZombie("newFoo");
 
 	zombie.announce();
 	newzombie->announce();

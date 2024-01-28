@@ -13,5 +13,5 @@ int	main(void)
 	std::cout << std::endl;
 	harl.complain("ERROR");
 	std::cout << std::endl;
-	harl.complain("dafhaklds");
+	harl.complain("no level");
 }

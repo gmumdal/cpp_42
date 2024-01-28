@@ -3,7 +3,7 @@
 
 Zombie::Zombie() : name("")
 {
-	std::cout << "create : standard" << std::endl;
+	std::cout << "create : no name" << std::endl;
 }
 
 Zombie::Zombie(std::string _name) : name(_name)
@@ -24,5 +24,5 @@ void	Zombie::announce(void)
 void	Zombie::set_name(std::string _name)
 {
 	name = _name;
-	std::cout << "set_name : " << name << std::endl;
+	std::cout << "set name : " << name << std::endl;
 }

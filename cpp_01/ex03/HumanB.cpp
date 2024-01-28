@@ -23,4 +23,5 @@ void	HumanB::attack()
 void	HumanB::setWeapon(Weapon &_weapon)
 {
 	weapon = &_weapon;
+	std::cout << name << " is armed " << weapon->getType() << std::endl;
 }
