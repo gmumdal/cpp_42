@@ -12,14 +12,14 @@ int	main(int ac, char **av)
 	std::string	file = av[1];
 	std::string	s1 = av[2];
 	std::string	s2 = av[3];
-	std::ifstream	input(file);
+	std::ifstream	input(file.c_str());
 	if (!input.is_open())
 	{
 		std::cerr << "error" << std::endl;
 		return (1);
 	}
 	file.append(".replace");
-	std::ofstream	output(file);
+	std::ofstream	output(file.c_str());
 	if (!output.is_open())
 	{
 		input.close();
