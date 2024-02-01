@@ -13,12 +13,16 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const Fixed &copy)
 {
+	if (this == &copy)
+		return ;
 	std::cout << "Copy constructor called" << std::endl;
 	value = copy.getRawBits();
 }
 
 Fixed&	Fixed::operator=(const Fixed &copy)
 {
+	if (this == &copy)
+		return ;
 	std::cout << "Copy assignment operator called" << std::endl;
 	value = copy.getRawBits();
 	return (*this);
