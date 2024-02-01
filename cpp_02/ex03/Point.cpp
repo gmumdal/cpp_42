@@ -3,19 +3,16 @@
 
 Point::Point() : x(0), y(0)
 {
-	std::cout << "Point Default constructor called" << std::endl;
+	std::cout << "Point Constructor called" << std::endl;
 }
 
 Point::Point(const float _x, const float _y) : x(_x), y(_y)
 {
-	std::cout << "Point Float constructor called" << std::endl;
+	std::cout << "Point float Constructor called" << std::endl;
 }
 
 Point::Point(const Point &copy)
 {
-	if (this == &copy)
-		return ;
-	std::cout << "Point Copy constructor called" << std::endl;
 	x = copy.x;
 	y = copy.y;
 }
@@ -24,7 +21,6 @@ Point	&Point::operator= (const Point &copy)
 {
 	if (this == &copy)
 		return (*this);
-	std::cout << "Point Copy assignment operator called" << std::endl;
 	x = copy.x;
 	y = copy.y;
 	return (*this);
@@ -49,7 +45,7 @@ bool	Point::point_inline(const Point &a, const Point &b) const
 
 Fixed	Point::tri_area(const Point &a, const Point &b) const
 {
-	Fixed	abc((float)fabs(0.5 * ((a.x * b.y + b.x * y + x * a.y
+	Fixed	abc((Fixed(0.5f) * ((a.x * b.y + b.x * y + x * a.y
 			- b.x * a.y - x * b.y - a.x * y))));
 	return (abc);
 }

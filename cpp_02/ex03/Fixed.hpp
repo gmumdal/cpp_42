@@ -30,16 +30,18 @@ class	Fixed
 		static Fixed		&max(Fixed &first, Fixed &second);
 		static const Fixed	&max(const Fixed &first, const Fixed &second);
 
-		float	operator+ (const Fixed &other) const;
-		float	operator- (const Fixed &other) const;
-		float	operator* (const Fixed &other) const;
-		float	operator/ (const Fixed &other) const;
+		Fixed	operator+ (const Fixed &other) const;
+		Fixed	operator- (const Fixed &other) const;
+		Fixed	operator* (const Fixed &other) const;
+		Fixed	operator/ (const Fixed &other) const;
+
 		bool	operator> (const Fixed &other) const;
 		bool	operator< (const Fixed &other) const;
 		bool	operator>= (const Fixed &other) const;
 		bool	operator<= (const Fixed &other) const;
 		bool	operator== (const Fixed &other) const;
 		bool	operator!= (const Fixed &other) const;
+		
 		Fixed	operator++(int);
 		Fixed	&operator++();
 		Fixed	operator--(int);

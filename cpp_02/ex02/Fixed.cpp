@@ -3,17 +3,17 @@
 
 Fixed::Fixed() : value(0)
 {
-	std::cout << "Default constructor called" << std::endl;
+	std::cout << "Default Constructor called" << std::endl;
 }
 
 Fixed::Fixed(const int _value) : value(_value << bits)
 {
-	std::cout << "Int constructor called" << std::endl;
+	std::cout << "Int Constructor called" << std::endl;
 }
 
 Fixed::Fixed(const float _value) : value(roundf(_value * (1 << bits)))
 {
-	std::cout << "Float constructor called" << std::endl;
+	std::cout << "Float Constructor called" << std::endl;
 }
 
 Fixed::~Fixed()
@@ -23,9 +23,7 @@ Fixed::~Fixed()
 
 Fixed::Fixed(const Fixed &copy)
 {
-	if (this == &copy)
-		return ;
-	std::cout << "Copy constructor called" << std::endl;
+	std::cout << "Copy Constructor called" << std::endl;
 	value = copy.value;
 }
 
@@ -97,22 +95,22 @@ const Fixed	&Fixed::max(const Fixed &first, const Fixed &second)
 		return (second);
 }
 
-float	Fixed::operator+ (const Fixed &other) const
+Fixed	Fixed::operator+ (const Fixed &other) const
 {
 	return (this->toFloat() + other.toFloat());
 }
 
-float	Fixed::operator- (const Fixed &other) const
+Fixed	Fixed::operator- (const Fixed &other) const
 {
 	return (this->toFloat() - other.toFloat());
 }
 
-float	Fixed::operator* (const Fixed &other) const
+Fixed	Fixed::operator* (const Fixed &other) const
 {
 	return (this->toFloat() * other.toFloat());
 }
 
-float	Fixed::operator/ (const Fixed &other) const
+Fixed	Fixed::operator/ (const Fixed &other) const
 {
 	return (this->toFloat() / other.toFloat());
 }
@@ -165,12 +163,12 @@ Fixed	Fixed::operator--(int)
 {
 	Fixed	tmp = *this;
 
-	value += 1;
+	value -= 1;
 	return (tmp);
 }
 
 Fixed	&Fixed::operator--()
 {
-	value += 1;
+	value -= 1;
 	return (*this);
 }
