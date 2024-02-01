@@ -20,7 +20,7 @@ class	Fixed
 		Fixed(const Fixed &copy); // 복사의 대상이 변경되지 않게 const
 		Fixed	&operator= (const Fixed &copy);
 
-		int		getRawBits(void)	const;
+		int		getRawBits(void) const;
 		void	setRawBits(int const raw);
 		float	toFloat(void) const;
 		int		toInt(void) const;
@@ -42,10 +42,10 @@ class	Fixed
 		bool	operator== (const Fixed &other) const;
 		bool	operator!= (const Fixed &other) const;
 		
-		Fixed	operator++(int);
-		Fixed	&operator++();
-		Fixed	operator--(int);
-		Fixed	&operator--();
+		const Fixed	operator++(int);
+		Fixed		&operator++();
+		const Fixed	operator--(int);
+		Fixed		&operator--();
 };
 
 std::ostream	&operator<< (std::ostream& os, const Fixed& fixed);

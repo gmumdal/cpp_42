@@ -145,7 +145,7 @@ bool	Fixed::operator!= (const Fixed &other) const
 	return (value != other.value);
 }
 
-Fixed	Fixed::operator++(int)
+const Fixed	Fixed::operator++(int)
 {
 	Fixed	tmp = *this;
 
@@ -159,7 +159,7 @@ Fixed	&Fixed::operator++()
 	return (*this);
 }
 
-Fixed	Fixed::operator--(int)
+const Fixed	Fixed::operator--(int)
 {
 	Fixed	tmp = *this;
 

@@ -7,14 +7,15 @@
 class	Point
 {
 	private:
-		Fixed	x;
-		Fixed	y;
+		Fixed const	x;
+		Fixed const	y;
 	
+		Point	&operator= (const Point &copy);
+		
 	public:
 		Point();
 		Point(const float _x, const float _y);
 		Point(const Point &copy);
-		Point	&operator= (const Point &copy);
 		~Point();
 
 		bool	point_inline(const Point &a, const Point &b) const;

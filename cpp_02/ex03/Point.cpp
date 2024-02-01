@@ -11,18 +11,11 @@ Point::Point(const float _x, const float _y) : x(_x), y(_y)
 	std::cout << "Point float Constructor called" << std::endl;
 }
 
-Point::Point(const Point &copy)
-{
-	x = copy.x;
-	y = copy.y;
-}
+Point::Point(const Point &copy) : x(copy.x), y(copy.y) {}
 
 Point	&Point::operator= (const Point &copy)
 {
-	if (this == &copy)
-		return (*this);
-	x = copy.x;
-	y = copy.y;
+	(void) copy;
 	return (*this);
 }
 
