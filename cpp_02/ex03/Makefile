@@ -1,4 +1,4 @@
-NAME = Now_talking
+NAME = bsp
 SRCS = main.cpp Fixed.cpp Point.cpp bsp.cpp
 INCS = Fixed.hpp Point.hpp
 INC_DIR = -I ./

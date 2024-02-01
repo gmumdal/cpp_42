@@ -32,7 +32,7 @@ Fixed::Fixed(const Fixed &copy)
 Fixed&	Fixed::operator=(const Fixed &copy)
 {
 	if (this == &copy)
-		return ;
+		return (*this);
 	std::cout << "Copy assignment operator called" << std::endl;
 	value = copy.value;
 	return (*this);
