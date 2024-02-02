@@ -40,5 +40,7 @@ Fixed	Point::tri_area(const Point &a, const Point &b) const
 {
 	Fixed	abc((Fixed(0.5f) * ((a.x * b.y + b.x * y + x * a.y
 			- b.x * a.y - x * b.y - a.x * y))));
+	if (abc < 0)
+		return (abc * Fixed(-1.0f));
 	return (abc);
 }
