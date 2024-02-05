@@ -1,14 +1,22 @@
 
 #include "ScavTrap.hpp"
 
-ScavTrap::ScavTrap() : name("noname"), hit_point(100), energy_point(50), attack_damage(20)
+ScavTrap::ScavTrap()
 {
 	std::cout << "Default Constructor called" << std::endl;
+	name = "noname";
+	hit_point = 100;
+	energy_point = 50;
+	attack_damage = 20;	
 }
 
-ScavTrap::ScavTrap(const std::string &_name) : name(_name), hit_point(100), energy_point(50), attack_damage(20)
+ScavTrap::ScavTrap(const std::string &_name)
 {
 	std::cout << _name << " Constructor called" << std::endl;
+	name = _name;
+	hit_point = 100;
+	energy_point = 50;
+	attack_damage = 20;
 }
 
 ScavTrap::~ScavTrap()
@@ -16,20 +24,14 @@ ScavTrap::~ScavTrap()
 	std::cout << "Distructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &copy) : name(copy.name), hit_point(copy.hit_point), energy_point(copy.energy_point), attack_damage(copy.attack_damage)
-{
-	std::cout << "Copy Constructor called" << std::endl;
-}
+ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy) {}
 
 ScavTrap &ScavTrap::operator= (const ScavTrap &copy)
 {
 	if (this == &copy)
 		return (*this);
 	std::cout << "Copy assignment operator called" << std::endl;
-	name = copy.name;
-	hit_point = copy.hit_point;
-	energy_point = copy.energy_point;
-	attack_damage = copy.attack_damage;
+	ClapTrap::operator= (copy);
 	return (*this);
 }
 

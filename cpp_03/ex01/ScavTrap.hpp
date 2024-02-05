@@ -6,12 +6,6 @@
 
 class	ScavTrap : public   ClapTrap
 {
-	private:
-		std::string	name;
-		int			hit_point;
-		int			energy_point;
-		int 		attack_damage;
-
 	public:
 		ScavTrap();
 		ScavTrap(const std::string &_name);
