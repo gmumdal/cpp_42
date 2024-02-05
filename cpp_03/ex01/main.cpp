@@ -7,8 +7,11 @@ int	main(void)
 	ScavTrap	malphite("Malphite");
 	ClapTrap	riot;
 
+	riot = ScavTrap("queen");
+
 	for (int i = 0 ; i < 5; i++)
 		malphite.beRepaired(10);
+	malphite.guardGate();
 	malphite.attack(riot.get_name());
 	riot.takeDamage(malphite.get_attack_damage());
 	malphite.attack(riot.get_name());
