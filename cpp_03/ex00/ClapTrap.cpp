@@ -33,26 +33,6 @@ ClapTrap &ClapTrap::operator= (const ClapTrap &copy)
 	return (*this);
 }
 
-std::string	ClapTrap::get_name(void) const
-{
-	return (name);
-}
-
-int	ClapTrap::get_hit_point(void) const
-{
-	return (hit_point);
-}
-
-int	ClapTrap::get_energy_point(void) const
-{
-	return (energy_point);
-}
-	
-int	ClapTrap::get_attack_damage(void) const
-{
-	return (attack_damage);
-}
-
 void	ClapTrap::attack(const std::string &target)
 {
 	if (hit_point == 0)
