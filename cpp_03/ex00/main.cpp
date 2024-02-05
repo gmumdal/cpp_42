@@ -7,13 +7,16 @@ int	main(void)
 	ClapTrap	malphite("Malphite");
 	ClapTrap	riot;
 
+	std::cout << std::endl;
 	for (int i = 0 ; i < 5; i++)
 		malphite.beRepaired(10);
+	std::cout << std::endl;
 	malphite.attack(riot.get_name());
 	riot.takeDamage(malphite.get_attack_damage());
 	malphite.attack(riot.get_name());
 	riot.takeDamage(malphite.get_attack_damage());
-	for (int i = 0 ; i < 10; i++)
+	std::cout << std::endl;
+	for (int i = 0 ; i < 11; i++)
 	{
 		jax.attack(malphite.get_name());
 		malphite.takeDamage(jax.get_attack_damage());
