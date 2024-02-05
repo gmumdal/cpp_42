@@ -24,7 +24,7 @@ ScavTrap::~ScavTrap()
 	std::cout << "ScavTrap Distructor called" << std::endl;
 }
 
-ScavTrap::ScavTrap(const ScavTrap &copy)
+ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap()
 {
 	std::cout << "ScavTrap Copy Constructor called" << std::endl;
 	name = copy.name;

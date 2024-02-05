@@ -82,3 +82,13 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		<< " repair " << amount
 				<< " points of health!" << std::endl;
 }
+
+std::string	ClapTrap::get_name(void) const
+{
+	return (name);
+}
+
+int	ClapTrap::get_attack_damage(void) const
+{
+	return (attack_damage);
+}

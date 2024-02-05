@@ -7,7 +7,7 @@ DiamondTrap::DiamondTrap()
 	name = "noname";
 	ClapTrap::name = "noname_clap_name";
 	hit_point = FragTrap::hit_point;
-	energy_point = 50;
+	energy_point = 50; // ScavTrap::energy_point
 	attack_damage = FragTrap::attack_damage;
 }
 
@@ -17,7 +17,7 @@ DiamondTrap::DiamondTrap(const std::string &_name)
 	name = _name;
 	ClapTrap::name = _name + "_clap_name";
 	hit_point = FragTrap::hit_point;
-	energy_point = 50;
+	energy_point = 50; // ScavTrap::energy_point
 	attack_damage = FragTrap::attack_damage;
 }
 
