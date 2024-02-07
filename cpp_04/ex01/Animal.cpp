@@ -16,7 +16,6 @@ Animal::Animal(const Animal &copy)
 	std::cout << "Animal copy constructor called" << std::endl;
 	type = copy.type;
 }
-
 Animal	&Animal::operator= (const Animal &copy)
 {
 	if (this == &copy)
