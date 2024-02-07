@@ -1,31 +1,27 @@
 
+#include "DiamondTrap.hpp"
 #include "ScavTrap.hpp"
 #include "FragTrap.hpp"
 
 int	main(void)
 {
-	ClapTrap	jax("Jax");
-	ScavTrap	malphite("Malphite");
-	FragTrap	riot;
+	DiamondTrap	riot;
 
-	riot = FragTrap("queen");
+	riot = DiamondTrap("teemo");
 
 	std::cout << std::endl;
 
-	malphite.beRepaired(10);
-	std::cout << std::endl;
-	malphite.guardGate();
-	std::cout << std::endl;
+	riot.attack("Garen");
+	riot.takeDamage(10);
+	riot.beRepaired(10);
+	riot.guardGate();
 	riot.highFivesGuys();
+	riot.whoAmI();
+
 	std::cout << std::endl;
-	malphite.attack(riot.get_name());
-	riot.takeDamage(malphite.get_attack_damage());
-	riot.attack(malphite.get_name());
-	malphite.takeDamage(riot.get_attack_damage());
+
+	DiamondTrap	jax(riot);
+
+	jax.whoAmI();
 	std::cout << std::endl;
-	for (int i = 0 ; i < 3; i++)
-	{
-		jax.attack(riot.get_name());
-		riot.takeDamage(jax.get_attack_damage());
-	}
 }
