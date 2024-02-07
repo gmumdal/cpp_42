@@ -47,7 +47,7 @@ FragTrap &FragTrap::operator= (const FragTrap &copy)
 
 void	FragTrap::highFivesGuys(void)
 {
-	if (hit_point == 0)
+	if (hit_point <= 0)
 	{
 		std::cout << "FragTrap " << name << " is dead" << std::endl;
 		return ;

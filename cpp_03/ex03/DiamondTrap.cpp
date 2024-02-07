@@ -49,6 +49,16 @@ DiamondTrap &DiamondTrap::operator= (const DiamondTrap &copy)
 
 void	DiamondTrap::whoAmI(void)
 {
+	if (hit_point <= 0)
+	{
+		std::cout << "FragTrap " << name << " is dead" << std::endl;
+		return ;
+	}
+	if (energy_point == 0)
+	{
+		std::cout << "FragTrap " << name << " hasn't enough energy" << std::endl;
+		return ;
+	}
 	std::cout << name << " member function call : whoAmI" << std::endl;
 	std::cout << "claptrap : " << ClapTrap::name << std::endl;
 	std::cout << "diamondtrap : " << name << std::endl;

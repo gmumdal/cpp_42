@@ -48,7 +48,7 @@ ScavTrap &ScavTrap::operator= (const ScavTrap &copy)
 
 void	ScavTrap::attack(const std::string &target)
 {
-	if (hit_point == 0)
+	if (hit_point <= 0)
 	{
 		std::cout << "ScavTrap " << name << " is dead" << std::endl;
 		return ;
@@ -67,7 +67,7 @@ void	ScavTrap::attack(const std::string &target)
 
 void	ScavTrap::guardGate(void)
 {
-	if (hit_point == 0)
+	if (hit_point <= 0)
 	{
 		std::cout << "ScavTrap " << name << " is dead" << std::endl;
 		return ;

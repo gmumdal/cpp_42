@@ -35,7 +35,7 @@ ClapTrap &ClapTrap::operator= (const ClapTrap &copy)
 
 void	ClapTrap::attack(const std::string &target)
 {
-	if (hit_point == 0)
+	if (hit_point <= 0)
 	{
 		std::cout << "ClapTrap " << name << " is dead" << std::endl;
 		return ;
@@ -54,12 +54,14 @@ void	ClapTrap::attack(const std::string &target)
 
 void	ClapTrap::takeDamage(unsigned int amount)
 {
-	if (hit_point == 0)
+	if (hit_point <= 0)
 	{
 		std::cout << "ClapTrap " << name << " is dead" << std::endl;
 		return ;
 	}
 	hit_point -= amount;
+	if (hit_point < 0)
+		hit_point = 0;
 	std::cout << "ClapTrap " << name
 		<< " attacked " << amount
 				<< " points of damage!" << std::endl;
@@ -67,7 +69,7 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (hit_point == 0)
+	if (hit_point <= 0)
 	{
 		std::cout << "ClapTrap " << name << " is dead" << std::endl;
 		return ;
@@ -78,6 +80,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		return ;
 	}
 	hit_point += amount;
+	energy_point--;
 	std::cout << "ClapTrap " << name
 		<< " repair " << amount
 				<< " points of health!" << std::endl;
@@ -91,9 +94,4 @@ std::string	ClapTrap::get_name(void) const
 int	ClapTrap::get_attack_damage(void) const
 {
 	return (attack_damage);
-}
-
-int	ClapTrap::get_energy_point(void) const
-{
-	return (energy_point);
 }
