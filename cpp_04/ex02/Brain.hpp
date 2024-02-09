@@ -17,9 +17,8 @@ class Brain
 		Brain(const Brain &copy);
 		Brain	&operator= (const Brain &copy);
 		
-		void	make_ideas(const std::string &idea);
+		void	make_ideas(std::string &idea);
 		void	say_ideas(void);
-		void	dup_ideas(const Brain &copy);
 };
 
 #endif

@@ -6,18 +6,44 @@
 int	main()
 {
 	{
-		const Animal	*animal[10];
-		const Animal	*tmp = new Animal();
+		Animal	*animal[10];
+
 		for (int i = 0; i < 5; i++)
 			animal[i] = new Dog();
+
+		std::cout << std::endl;
 		for (int i = 5; i < 10; i++)
 			animal[i] = new Cat();
+
+		std::cout << std::endl;
 		for (int i = 0; i < 10; i++)
 			animal[i]->makeSound();
-		tmp->makeSound();
+
+		std::cout << std::endl;
 		for (int i = 0; i < 10; i++)
 			delete animal[i];
-		delete tmp;
 	}
+	std::cout << std::endl;
+	std::cout << std::endl;
+	{
+		Cat	cat;
+		Dog	dog;
+		Cat	copycat(cat);
+		Dog	copydog(dog);
+
+		for (int i = 0; i < 5; i++)
+		{
+			cat.makeSound();
+			dog.makeSound();
+		}
+		std::cout << std::endl;
+		std::cout << std::endl;
+		for (int i = 0; i < 5; i++)
+		{
+			copycat.makeSound();
+			copydog.makeSound();
+		}
+	}
+
 	return 0;
 }

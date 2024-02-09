@@ -27,11 +27,13 @@ Animal	&Animal::operator= (const Animal &copy)
 
 void	Animal::makeSound(void) const
 {
+	std::cout << std::endl;
 	std::cout << "============================================= " << std::endl;
 	std::cout << "Animal member funcion : makeSound called" << std::endl;
 	std::cout << "type : " << type << std::endl;
 	std::cout << "Animal Sound !" << std::endl;
 	std::cout << "============================================= " << std::endl;
+	std::cout << std::endl;
 }
 
 std::string	Animal::getType(void) const

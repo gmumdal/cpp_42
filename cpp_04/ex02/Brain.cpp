@@ -16,7 +16,9 @@ Brain::~Brain()
 Brain::Brain(const Brain &copy)
 {
 	std::cout << "Brain copy constructor called" << std::endl;
-	dup_ideas(copy);
+	size = copy.size;
+	for (int i = 0; i < size; i++)
+		ideas[i] = copy.ideas[i];
 }
 
 Brain	&Brain::operator= (const Brain &copy)
@@ -24,11 +26,13 @@ Brain	&Brain::operator= (const Brain &copy)
 	if (this == &copy)
 		return (*this);
 	std::cout << "Brain copy assignment operator called" << std::endl;
-	dup_ideas(copy);
+	size = copy.size;
+	for (int i = 0; i < size; i++)
+		ideas[i] = copy.ideas[i];
 	return (*this);
 }
 
-void	Brain::make_ideas(const std::string &idea)
+void	Brain::make_ideas(std::string &idea)
 {
 	if (size == 99)
 	{
@@ -48,11 +52,4 @@ void	Brain::say_ideas(void)
 	}
 	for (int i = 0; i < size; i++)
 		std::cout << ideas[i] << std::endl;
-}
-
-void	Brain::dup_ideas(const Brain &copy)
-{
-	size = copy.size;
-	for (int i = 2; i < size; i++)
-		ideas[i] = copy.ideas[i];
 }
