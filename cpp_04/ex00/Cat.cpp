@@ -32,7 +32,7 @@ void	Cat::makeSound(void) const
 	std::cout << "============================================= " << std::endl;
 	std::cout << "Cat member funcion : makeSound called" << std::endl;
 	std::cout << "type : " << type << std::endl;
-	std::cout << "Cat Sound !" << std::endl;
+	std::cout << "Mawww.. " << std::endl;
 	std::cout << "============================================= " << std::endl;
 	std::cout << std::endl;
 }

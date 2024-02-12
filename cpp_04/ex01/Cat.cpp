@@ -20,6 +20,7 @@ Cat::Cat(const Cat &copy) : Animal(copy)
 	brain->dup_ideas(*copy.brain);
 	std::cout << "Cat copy constructor called" << std::endl;
 }
+
 Cat	&Cat::operator= (const Cat &copy)
 {
 	if (this == &copy)

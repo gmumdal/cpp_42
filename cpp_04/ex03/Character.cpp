@@ -1,27 +1,29 @@
 
 #include "Character.hpp"
 
-Character::Character() : name("no_name"), size(0)
+Character::Character() : name("no_name"), size(0), save_size(0)
 {
 	std::cout << "Character default constructor called" << std::endl;
-	inventory[0] = NULL;
-	inventory[1] = NULL;
-	inventory[2] = NULL;
-	inventory[3] = NULL;
+	for (int i = 0; i < 4; i++)
+		inventory[i] = NULL;
+	for (int i = 0; i < 50; i++)
+		save[i] = NULL;
+	
 }
 
 Character::Character(const std::string _name) : name(_name), size(0)
 {
 	std::cout << "Character copy constructor called" << std::endl;
-	inventory[0] = NULL;
-	inventory[1] = NULL;
-	inventory[2] = NULL;
-	inventory[3] = NULL;
+	for (int i = 0; i < 4; i++)
+		inventory[i] = NULL;
+	for (int i = 0; i < 50; i++)
+		save[i] = NULL;
 }
 
 Character::~Character()
 {
-	//delete all
+	for (int i = 0; i < 50; i++)
+		delete save[i];
 	std::cout << "Character distructor called" << std::endl;
 }
 
@@ -59,6 +61,7 @@ void Character::equip(AMateria* m)
 {
 	int	idx;
 
+	save[save_size++] = m;	
 	if (size == 4)
 		return ;
 	for (idx = 0; idx < 4; idx++)

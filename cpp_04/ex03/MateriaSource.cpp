@@ -12,6 +12,8 @@ MateriaSource::MateriaSource() : size(0)
 
 MateriaSource::~MateriaSource()
 {
+	for (int i = 0; i < size; i++)
+		delete save[i];
 	std::cout << "MateriaSource distructor called" << std::endl;
 }
 
@@ -44,32 +46,30 @@ MateriaSource &MateriaSource::operator= (const MateriaSource &copy)
 
 void	MateriaSource::learnMateria(AMateria *m)
 {
-	int	idx;
-
 	if (size == 4)
 	{
 		delete m;
 		return ;
 	}
-	for (idx = 0; idx < 4; idx++)
-	{
-		if (save[idx] == NULL)
-			break ;
-	}
-	save[idx] = m;
-	size++;
+	save[size++] = m;
 }
 
 AMateria	*MateriaSource::createMateria(std::string const &type)
 {
 	AMateria	*toss;
 
-	if (type == "ice")
-		toss = new Ice();
-	else if (type == "cure")
-		toss = new Cure();
-	else
-		toss = NULL;
+	toss = NULL;
+	for (int i = 0; i < size; i++)
+	{
+		if (save[i]->getType() == type)
+		{
+			if (type == "ice")
+				toss = new Ice();
+			else if (type == "cure")
+				toss = new Cure();
+			break ;
+		}
+	}
 	return (toss);
 }
  

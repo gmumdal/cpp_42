@@ -20,6 +20,7 @@ Dog::Dog(const Dog &copy) : Animal(copy)
 	brain->dup_ideas(*copy.brain);
 	std::cout << "Dog copy constructor called" << std::endl;
 }
+
 Dog	&Dog::operator= (const Dog &copy)
 {
 	if (this == &copy)

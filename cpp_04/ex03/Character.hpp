@@ -9,7 +9,9 @@ class Character : public ICharacter
 	private:
 		std::string	name;
 		AMateria	*inventory[4];
+		AMateria	*save[50];
 		int			size;
+		int			save_size;
 	
 		Character();
 		

@@ -17,7 +17,6 @@ class Cat : public Animal
 		Cat	&operator= (const Cat &copy);
 
 		void	makeSound(void) const;
-		void	make_idea(std::string &idea);
 };
 
 #endif

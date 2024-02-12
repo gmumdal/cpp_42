@@ -32,7 +32,7 @@ void	Dog::makeSound(void) const
 	std::cout << "============================================= " << std::endl;
 	std::cout << "Dog member funcion : makeSound called" << std::endl;
 	std::cout << "type : " << type << std::endl;
-	std::cout << "Dog Sound !" << std::endl;
+	std::cout << "Bark !" << std::endl;
 	std::cout << "============================================= " << std::endl;
 	std::cout << std::endl;
 }
