@@ -24,6 +24,8 @@ Character::~Character()
 {
 	for (int i = 0; i < 50; i++)
 		delete save[i];
+	for (int i = 0; i < 4; i++)
+		delete inventory[i];
 	std::cout << "Character distructor called" << std::endl;
 }
 
@@ -61,9 +63,11 @@ void Character::equip(AMateria* m)
 {
 	int	idx;
 
-	save[save_size++] = m;	
 	if (size == 4)
+	{
+		delete m;
 		return ;
+	}
 	for (idx = 0; idx < 4; idx++)
 	{
 		if (inventory[idx] == NULL)
@@ -77,6 +81,7 @@ void Character::unequip(int idx)
 {
 	if (inventory[idx] == NULL)
 		return ;
+	save[save_size++] = inventory[idx];
 	inventory[idx] = NULL;
 	size--;
 }
