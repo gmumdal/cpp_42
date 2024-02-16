@@ -4,6 +4,7 @@
 #include "PresidentialPardonForm.hpp"
 #include "RobotomyRequestForm.hpp"
 #include "ShrubberyCreationForm.hpp"
+#include "Intern.hpp"
 
 int	main(void)
 {
@@ -14,6 +15,8 @@ int	main(void)
 		ShrubberyCreationForm	form1("form_1");
 		RobotomyRequestForm		form2("form_2");
 		PresidentialPardonForm	form3("form_3");
+		Intern	intern;
+
 		//Form	form2("form_2", 151, 50);
 
 		bure1.signForm(form1);
@@ -34,14 +37,26 @@ int	main(void)
 		bure1.executeForm(form3);
 		std::cout << "------------------------------" << std::endl;
 
-		bure2.executeForm(form1);
-		bure2.executeForm(form2);
-		bure2.executeForm(form3);
+		//presidential pardon
+		//robotomy request
+		//shrubbery creation
+
 		std::cout << "------------------------------" << std::endl;
+		AForm	*form4 = intern.makeForm("presidential pardon", "form_4");
+		AForm	*form5 = intern.makeForm("robotomy request", "form_5");
+		AForm	*form6 = intern.makeForm("shrubbery creation", "form_6");
+
+		bure2.executeForm(*form4);
+		bure2.executeForm(*form5);
+		bure2.executeForm(*form6);
+		std::cout << "------------------------------" << std::endl;
+
+		delete form4;
+		delete form5;
+		delete form6;
 	}
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << std::endl;
 	}
-
 }

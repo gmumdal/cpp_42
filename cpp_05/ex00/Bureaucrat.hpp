@@ -24,24 +24,15 @@ class Bureaucrat
 		void		incGrade(void);
 		void		decGrade(void);
 
-		class GradeTooHighException
+		class GradeTooHighException : public std::logic_error
 		{
-			private:
-				const std::string	name;
-
 			public:
 				GradeTooHighException(const std::string &_name);
-				void	ErrorTooHigh() const;
 		};
-
-		class GradeTooLowException
+		class GradeTooLowException : public std::logic_error
 		{
-			private:
-				const std::string	name;
-
 			public:
 				GradeTooLowException(const std::string &_name);
-				void	ErrorTooLow() const;
 		};
 };
 

@@ -51,19 +51,9 @@ int			Form::getExecuteGrade() const
 	return (execute_grade);
 }
 
-Form::GradeTooLowException::GradeTooLowException(const std::string _name) : name(_name) {}
+Form::GradeTooLowException::GradeTooLowException(const std::string _name) : logic_error(_name + " Grade Too Low ..") {}
 
-Form::GradeTooHighException::GradeTooHighException(const std::string _name) : name(_name) {}
-
-void	Form::GradeTooLowException::ErrorTooLow() const
-{
-	std::cerr << name << " grade too low." << std::endl;
-}
-
-void	Form::GradeTooHighException::ErrorTooHigh() const
-{
-	std::cerr << name << " grade too high." << std::endl;
-}
+Form::GradeTooHighException::GradeTooHighException(const std::string _name) : logic_error(_name + " Grade Too High ..") {}
 
 void	Form::beSigned(const Bureaucrat &bureaucrat)
 {
@@ -74,10 +64,10 @@ void	Form::beSigned(const Bureaucrat &bureaucrat)
 		std::cout << bureaucrat.getName() << " signed " << name << std::endl;
 		sign = 1;
 	}
-	catch(const GradeTooLowException &e)
+	catch(const std::exception &e)
 	{
 		std::cerr << bureaucrat.getName() << " couldn’t sign " << name << " because ";
-		e.ErrorTooLow();
+		std::cerr << e.what() << std::endl;
 	}
 }
 

@@ -8,9 +8,15 @@ int	main(void)
 	{
 		Bureaucrat	bure1("bure_1", 150);
 		Bureaucrat	bure2("bure_2", 1);
-		Form	form1("form_1", 50, 50);
-		//Form	form2("form_2", 151, 50);
-
+		Form		form1("form_1", 50, 50);
+		try
+		{
+			Form	form2("form_2", 151, 50);
+		}
+		catch(const std::exception& e)
+		{
+			std::cerr << e.what() << std::endl;
+		}
 		bure1.signForm(form1);
 		std::cout << "------------------------------" << std::endl;
 		std::cout << form1 << std::endl;
@@ -20,21 +26,8 @@ int	main(void)
 		std::cout << form1 << std::endl;
 		std::cout << "------------------------------" << std::endl;
 	}
-	catch(const Bureaucrat::GradeTooLowException& e)
+	catch(const std::exception &e)
 	{
-		e.ErrorTooLow();
+		std::cerr << e.what() << std::endl;
 	}
-	catch(const Bureaucrat::GradeTooHighException& e)
-	{
-		e.ErrorTooHigh();
-	}
-	catch(const Form::GradeTooLowException& e)
-	{
-		e.ErrorTooLow();
-	}
-	catch(const Form::GradeTooHighException& e)
-	{
-		e.ErrorTooHigh();
-	}
-
 }

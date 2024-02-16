@@ -6,9 +6,9 @@ Bureaucrat::Bureaucrat() {}
 Bureaucrat::Bureaucrat(const std::string &_name, int _grade) : name(_name), grade(_grade)
 {
 	if (grade > 150)
-		throw GradeTooHighException(name);
-	else if (grade < 1)
 		throw GradeTooLowException(name);
+	else if (grade < 1)
+		throw GradeTooHighException(name);
 	std::cout << "* Bureaucrat constructor called *" << std::endl;
 }
 
@@ -60,16 +60,6 @@ std::ostream	&operator<< (std::ostream& os, const Bureaucrat &bureaucrat)
 	return (os);
 }
 
-Bureaucrat::GradeTooHighException::GradeTooHighException(const std::string &_name) : name(_name) {}
+Bureaucrat::GradeTooHighException::GradeTooHighException(const std::string &_name) : logic_error(_name + " Grade Too High ..") {}
 
-Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string &_name) : name(_name) {}
-
-void	Bureaucrat::GradeTooHighException::ErrorTooHigh() const
-{
-	std::cerr << "Error : " << name << "\'s grade too high" << std::endl;
-}
-
-void	Bureaucrat::GradeTooLowException::ErrorTooLow() const
-{
-	std::cerr << "Error : " << name << "\'s grade too low" << std::endl;
-}
+Bureaucrat::GradeTooLowException::GradeTooLowException(const std::string &_name) : logic_error(_name + " Grade Too Low ..") {}
