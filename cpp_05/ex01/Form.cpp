@@ -36,17 +36,17 @@ std::string	Form::getName() const
 	return (name);
 }
 
-bool		Form::getSign() const
+bool	Form::getSign() const
 {
 	return (sign);
 }
 
-int			Form::getSignGrade() const
+int	Form::getSignGrade() const
 {
 	return (sign_grade);
 }
 
-int			Form::getExecuteGrade() const
+int	Form::getExecuteGrade() const
 {
 	return (execute_grade);
 }

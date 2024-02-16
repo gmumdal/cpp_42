@@ -50,6 +50,14 @@ int	main(void)
 		bure2.executeForm(*form5);
 		bure2.executeForm(*form6);
 		std::cout << "------------------------------" << std::endl;
+		bure2.signForm(*form4);
+		bure2.signForm(*form5);
+		bure2.signForm(*form6);
+		std::cout << "------------------------------" << std::endl;
+		bure2.executeForm(*form4);
+		bure2.executeForm(*form5);
+		bure2.executeForm(*form6);
+		std::cout << "------------------------------" << std::endl;
 
 		delete form4;
 		delete form5;

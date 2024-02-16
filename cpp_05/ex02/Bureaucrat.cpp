@@ -40,18 +40,32 @@ int	Bureaucrat::getGrade(void) const
 
 void	Bureaucrat::incGrade(void)
 {
-	if (grade == 1)
-		throw GradeTooHighException(name);
-	grade--;
-	std::cout << name << " " <<  grade + 1 << "->" << grade << std::endl;
+	try
+	{
+		if (grade == 1)
+			throw GradeTooHighException(name);
+		grade--;
+		std::cout << name << " " <<  grade + 1 << "->" << grade << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << "Increase fail, because " << e.what() << std::endl;
+	}
 }
 
 void	Bureaucrat::decGrade(void)
 {
-	if (grade == 150)
-		throw GradeTooLowException(name);
-	grade++;
-	std::cout << name << " " << grade - 1 << "->" << grade << std::endl;
+	try
+	{	
+		if (grade == 150)
+			throw GradeTooLowException(name);
+		grade++;
+		std::cout << name << " " << grade - 1 << "->" << grade << std::endl;
+	}
+	catch (const std::exception &e)
+	{
+		std::cerr << "Decrease fail, because " << e.what() << std::endl;
+	}
 }
 
 std::ostream	&operator<< (std::ostream& os, const Bureaucrat &bureaucrat)

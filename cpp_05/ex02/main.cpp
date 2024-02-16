@@ -16,6 +16,8 @@ int	main(void)
 		PresidentialPardonForm	form3("form_3");
 		//Form	form2("form_2", 151, 50);
 
+		bure1.incGrade();
+		bure2.incGrade();
 		bure1.signForm(form1);
 		std::cout << "------------------------------" << std::endl;
 		std::cout << form1 << std::endl;
@@ -35,6 +37,12 @@ int	main(void)
 		std::cout << "------------------------------" << std::endl;
 
 		bure2.executeForm(form1);
+		bure2.executeForm(form2);
+		bure2.executeForm(form3);
+		std::cout << "------------------------------" << std::endl;
+	
+		bure2.signForm(form2);
+		bure2.signForm(form3);
 		bure2.executeForm(form2);
 		bure2.executeForm(form3);
 		std::cout << "------------------------------" << std::endl;
