@@ -29,14 +29,10 @@ class Intern
 
 		AForm	*makeForm(std::string type, std::string name);
 		
-		class NoType
+		class NoType : public std::logic_error
 		{
-			private:
-				std::string	type;
-
 			public:
 				NoType(std::string _type);
-				void	ErrorNoType();
 		};
 };
 

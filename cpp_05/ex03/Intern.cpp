@@ -69,9 +69,4 @@ AForm	*Intern::makeForm(std::string type, std::string name)
 	return (NULL);
 }
 
-Intern::NoType::NoType(std::string _type) : type(_type) {}
-
-void	Intern::NoType::ErrorNoType()
-{
-	std::cerr << type << "is not type of form." << std::endl;
-}
+Intern::NoType::NoType(std::string _type) : logic_error(_type + "is not type of form") {}
