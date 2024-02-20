@@ -35,9 +35,9 @@ int ScalarConverter::checkType(const std::string &target)
 		if (target.size() == 1)
 			return (CHAR);
 		if ((target[0] != '-' && target[0] != '+') && target.size() > 1)
-			return (ERROR);
+			return (STR_ERROR);
 		else if ((target[0] == '-' || target[0] == '+') && (target[1] < '0' || target[1] > '9'))
-			return (ERROR);
+			return (STR_ERROR);
 	}
 	int	zom = 0;
 	for (unsigned long i = 1; i < target.size(); i++)
@@ -45,15 +45,19 @@ int ScalarConverter::checkType(const std::string &target)
 		if (target[i] < '0' || target[i] > '9')
 		{
 			if (target[i] == '.' && (i == target.size() - 1 || zom == 1))
-				return (ERROR);
+				return (STR_ERROR);
 			else if (target[i] == '.')
 				zom++;
 			if ((target[i] == 'f' && (i != target.size() - 1 || target[i - 1] == '.')))
-				return (ERROR);
+				return (STR_ERROR);
 		}
 	}
 	if (target.find(".") == std::string::npos)
+	{
+		// if (target.size() > 6)
+		// 	return (SIZE_ERROR);
 		return (INT);
+	}
 	if (target.find("f", 0) == std::string::npos)
 		return (DOUBLE);
 	else
@@ -102,9 +106,14 @@ void ScalarConverter::doubleConvert(const std::string &target)
 		printConvert(c, i, f, d, OK);
 }
 
-void ScalarConverter::printError(const std::string &target)
+void ScalarConverter::strError(const std::string &target)
 {
-	std::cout << "error: " << target << std::endl;
+	std::cout << "str error: \"" << target << "\"" << std::endl;
+}
+
+void ScalarConverter::sizeError(const std::string &target)
+{
+	std::cout << "size error: \"" << target << "\"" << std::endl;
 }
 
 void	ScalarConverter::printConvert(char c, int i, float f, double d, int check)

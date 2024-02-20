@@ -6,11 +6,12 @@
 #include <string>
 #include <cstdlib>
 
-#define ERROR 0
 #define CHAR 1
 #define INT 2
 #define FLOAT 3
 #define DOUBLE 4
+#define STR_ERROR 5
+#define SIZE_ERROR 6
 #define OK 0
 #define NO 1
 
@@ -30,7 +31,8 @@ class ScalarConverter
 		static void intConvert(const std::string &target);
 		static void floatConvert(const std::string &target);
 		static void doubleConvert(const std::string &target);
-		static void printError(const std::string &target);
+		static void strError(const std::string &target);
+		static void sizeError(const std::string &target);
 		static void	printConvert(char c, int i, float f, double d, int check);
 };
 
