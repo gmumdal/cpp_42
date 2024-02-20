@@ -30,6 +30,8 @@ int ScalarConverter::checkType(const std::string &target)
 		return (FLOAT);
 	if (target == "inf" || target == "+inf" || target == "-inf" || target == "nan")
 		return (DOUBLE);
+	if (target.size() > 19)
+		return (SIZE_ERROR);
 	if (target[0] < '0' || target[0] > '9') 
 	{
 		if (target.size() == 1)
@@ -48,16 +50,14 @@ int ScalarConverter::checkType(const std::string &target)
 				return (STR_ERROR);
 			else if (target[i] == '.')
 				zom++;
-			if ((target[i] == 'f' && (i != target.size() - 1 || target[i - 1] == '.')))
+			else if ((target[i] == 'f' && (i != target.size() - 1 || target[i - 1] == '.')))
+				return (STR_ERROR);
+			else
 				return (STR_ERROR);
 		}
 	}
 	if (target.find(".") == std::string::npos)
-	{
-		// if (target.size() > 6)
-		// 	return (SIZE_ERROR);
 		return (INT);
-	}
 	if (target.find("f", 0) == std::string::npos)
 		return (DOUBLE);
 	else
@@ -75,33 +75,46 @@ void	ScalarConverter::charConvert(const std::string &target)
 
 void ScalarConverter::intConvert(const std::string &target)
 {
+	long	l = std::atol(target.c_str());
 	int		i = std::atoi(target.c_str());
 	char	c = static_cast<char>(i);
 	float	f = static_cast<float>(i);
 	double	d = static_cast<double>(i);
-	printConvert(c, i, f, d, OK);
+
+	if (l > 2147483647 || l < -2147483648)
+		printConvert(c, i, f, d, NOINT);
+	else if (l > 127 || l < -128)
+		printConvert(c, i, f, d, NOCHAR);
+	else
+		printConvert(c, i, f, d, OK);
 }
 
 void ScalarConverter::floatConvert(const std::string &target)
 {
-	float	f = std::strtod(target.c_str(), nullptr);
+	float	f = std::strtod(target.c_str(), NULL);
 	char	c = static_cast<char>(f);
+	long	l = static_cast<long>(f);
 	int		i = static_cast<int>(f);
 	double	d = static_cast<double>(f);
 	if (target == "inff" || target == "+inff" || target == "-inff" || target == "nanf")
-		printConvert(c, i, f, d, NO);
+		printConvert(c, i, f, d, NOINT);
+	else if (l > 2147483647 || l < -2147483648)
+		printConvert(c, i, f, d, NOINT);
 	else
 		printConvert(c, i, f, d, OK);
 }
 
 void ScalarConverter::doubleConvert(const std::string &target)
 {
-	double	d = std::strtod(target.c_str(), nullptr);
+	double	d = std::strtod(target.c_str(), NULL);
 	char	c = static_cast<char>(d);
+	long	l = static_cast<long>(d);
 	int		i = static_cast<int>(d);
 	float	f = static_cast<float>(d);
 	if (target == "inf" || target == "+inf" || target == "-inf" || target == "nan")
-		printConvert(c, i, f, d, NO);
+		printConvert(c, i, f, d, NOINT);
+	else if (l > 2147483647 || l < -2147483648)
+		printConvert(c, i, f, d, NOINT);
 	else
 		printConvert(c, i, f, d, OK);
 }
@@ -122,11 +135,11 @@ void	ScalarConverter::printConvert(char c, int i, float f, double d, int check)
 		std::cout << "char: \'" << c << "\'" << std::endl;
 	else if (check == OK)
 		std::cout << "char: Non displayable" << std::endl;
-	else if (check == NO)
+	else if (check > OK)
 		std::cout << "char: impossible" << std::endl;
-	if (check == OK)
+	if (check < NOINT)
 		std::cout << "int: " << i << std::endl;
-	else if (check == NO)
+	else if (check == NOINT)
 		std::cout << "int: " << "impossible" << std::endl;
 	if (f - i == 0)
 	{

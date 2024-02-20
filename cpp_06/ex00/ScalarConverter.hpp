@@ -13,7 +13,8 @@
 #define STR_ERROR 5
 #define SIZE_ERROR 6
 #define OK 0
-#define NO 1
+#define NOCHAR 1
+#define NOINT 2
 
 class ScalarConverter 
 {

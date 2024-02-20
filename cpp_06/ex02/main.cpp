@@ -9,7 +9,6 @@ Base	*generate(void)
 	Base	*p;
 	int		i;
 
-	srand(time(NULL));
 	i = rand() % 3;
 	if (i == 0)
 		p = new A;
@@ -35,22 +34,22 @@ void	identify(Base &p)
 	try
 	{
 		A	&a = dynamic_cast<A &>(p);
+		(void)a;
 		std::cout << "reference is A" << std::endl;
-		static_cast<void>(a);
 	}
 	catch(const std::exception& e) {}
 	try
 	{
 		B	&b = dynamic_cast<B &>(p);
+		(void)b;
 		std::cout << "reference is B" << std::endl;
-		static_cast<void>(b);
 	}
 	catch(const std::exception& e) {}
 	try
 	{
 		C	&c = dynamic_cast<C &>(p);
-		std::cout << "reference is A" << std::endl;
-		static_cast<void>(c);
+		(void)c;
+		std::cout << "reference is C" << std::endl;
 	}
 	catch(const std::exception& e) {}
 }
@@ -58,11 +57,13 @@ void	identify(Base &p)
 
 int	main(void)
 {
+	srand(time(NULL));
 	for (int i = 0; i < 10; i++)
 	{
 		Base	*tmp = generate();
 		identify(tmp);
 		identify(*tmp);
 		delete tmp;
+		std::cout << std::endl;
 	}
 }
