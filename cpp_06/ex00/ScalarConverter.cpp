@@ -30,8 +30,6 @@ int ScalarConverter::checkType(const std::string &target)
 		return (FLOAT);
 	if (target == "inf" || target == "+inf" || target == "-inf" || target == "nan")
 		return (DOUBLE);
-	if (target.size() > 19)
-		return (SIZE_ERROR);
 	if (target[0] < '0' || target[0] > '9') 
 	{
 		if (target.size() == 1)
@@ -56,8 +54,10 @@ int ScalarConverter::checkType(const std::string &target)
 				return (STR_ERROR);
 		}
 	}
-	if (target.find(".") == std::string::npos)
+	if (target.find(".") == std::string::npos && target.size() <= 19)
 		return (INT);
+	else if (target.find(".") == std::string::npos && target.size() > 19)
+		return (SIZE_ERROR);
 	if (target.find("f", 0) == std::string::npos)
 		return (DOUBLE);
 	else

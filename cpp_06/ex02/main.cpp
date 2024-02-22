@@ -4,6 +4,19 @@
 #include "B.hpp"
 #include "C.hpp"
 
+int	main(void)
+{
+	srand(time(NULL));
+	for (int i = 0; i < 10; i++)
+	{
+		Base	*tmp = generate();
+		identify(tmp);
+		identify(*tmp);
+		delete tmp;
+		std::cout << std::endl;
+	}
+}
+
 Base	*generate(void)
 {
 	Base	*p;
@@ -52,18 +65,4 @@ void	identify(Base &p)
 		std::cout << "reference is C" << std::endl;
 	}
 	catch(const std::exception& e) {}
-}
-
-
-int	main(void)
-{
-	srand(time(NULL));
-	for (int i = 0; i < 10; i++)
-	{
-		Base	*tmp = generate();
-		identify(tmp);
-		identify(*tmp);
-		delete tmp;
-		std::cout << std::endl;
-	}
 }
