@@ -40,6 +40,7 @@ int ScalarConverter::checkType(const std::string &target)
 			return (STR_ERROR);
 	}
 	int	zom = 0;
+	int	f = 0;
 	for (unsigned long i = 1; i < target.size(); i++)
 	{
 		if (target[i] < '0' || target[i] > '9')
@@ -48,8 +49,10 @@ int ScalarConverter::checkType(const std::string &target)
 				return (STR_ERROR);
 			else if (target[i] == '.')
 				zom++;
-			else if ((target[i] == 'f' && (i != target.size() - 1 || target[i - 1] == '.')))
+			else if ((target[i] == 'f' && (i != target.size() - 1 || target[i - 1] == '.' || f == 1)))
 				return (STR_ERROR);
+			else if	(target[i] == 'f')
+				f++;
 			else
 				return (STR_ERROR);
 		}
