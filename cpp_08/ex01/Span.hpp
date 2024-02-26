@@ -5,6 +5,8 @@
 #include <iostream>
 #include <set>
 #include <vector>
+#include <cstdlib>
+#include <ctime>
 
 class Span
 {
