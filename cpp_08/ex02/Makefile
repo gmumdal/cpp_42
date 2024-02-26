@@ -1,6 +1,6 @@
-NAME = span
-SRCS = main.cpp Span.cpp
-INCS = Span.hpp
+NAME = mutate
+SRCS = main.cpp
+INCS =
 INC_DIR = -I ./
 OBJ_DIR = objs
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))

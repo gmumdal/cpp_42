@@ -3,14 +3,14 @@
 #define SPAN_HPP
 
 #include <iostream>
-#include <algorithm>
 #include <set>
+#include <vector>
 
 class Span
 {
 	private:
-		std::multiset<int>	vec;
-		unsigned int		n;
+		std::set<int>	mset;
+		unsigned int	n;
 		Span();
 
 	public:
@@ -20,8 +20,31 @@ class Span
 		Span &operator= (const Span &copy);
 	
 		void	addNumber(int add);
-		unsigned int	shortestSpan();
-		unsigned int	longestSpan();
+		int		shortestSpan() const;
+		int		longestSpan() const;
+
+		template <typename T>
+		void	addNumbers(T &container)
+		{
+			try
+			{
+				typename T::iterator	iter = container.begin();
+				while (42)
+				{
+					if (mset.size() == n)
+						throw std::logic_error("error : Span already full!");
+					if (iter == container.end())
+						break ;
+					mset.insert(*iter++);
+					if (mset.size() % 1000 == 0)
+						std::cout << "Span size " << mset.size() << std::endl;
+				}
+			}
+			catch(const std::exception& e)
+			{
+				std::cerr << e.what() << '\n';
+			}
+		}
 };
 
 #endif
