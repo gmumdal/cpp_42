@@ -1,6 +1,6 @@
-NAME = mutate
-SRCS = main.cpp
-INCS =
+NAME = pmergeme
+SRCS = main.cpp PMergeMe.cpp
+INCS = PMergeMe.hpp
 INC_DIR = -I ./
 OBJ_DIR = objs
 OBJS = $(addprefix $(OBJ_DIR)/, $(SRCS:.cpp=.o))
