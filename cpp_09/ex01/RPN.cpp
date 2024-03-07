@@ -3,14 +3,11 @@
 
 RPN::RPN() {}
 
-RPN::RPN(const RPN &copy)
-{
-	(void)copy;
-}
+RPN::RPN(const RPN &copy) : std::stack< double, std::deque<double> >(copy) {}
 
 RPN &RPN::operator= (const RPN &copy)
 {
-	(void)copy;
+	*this = copy;
 	return (*this);
 }
 
