@@ -24,7 +24,7 @@ PMergeMe::PMergeMe(int ac, char **av)
 		if (number > 2147483647)
 			throw std::logic_error("Error: too large number: " + std::string(av[i]));
 		vec.push_back(number);
-		dq.push_back(number);
+		lst.push_back(number);
 	}
 	std::cout << "PMergeMe constructor called" << std::endl;
 }
@@ -57,10 +57,11 @@ void	PMergeMe::print_arr(int state)
 
 	/* test */
 	(void)state;
+	std::list<int>::iterator	it = lst.begin();
 	std::cout << "------ vector, deque ------" << std::endl;
 	for (size_t i = 0; i < vec.size(); i++)
 		std::cout << "vec[" << i << "] : " << vec[i] << "  |  "
-		<< "dq[" << i << "] : " << dq[i] << std::endl;
+		<< "lst[" << i << "] : " << *it++ << std::endl;
 }
 
 void	PMergeMe::merge_insert_vec()

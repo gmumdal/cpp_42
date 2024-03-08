@@ -8,6 +8,7 @@
 #include <string>
 #include <cstdlib>
 #include <cmath>
+#include <list>
 
 #define BEFORE 0
 #define AFTER 1
@@ -16,8 +17,8 @@ class PMergeMe
 {
 	private:
 		std::vector<int>	vec;
-		std::deque<int>		dq;
-
+		std::list<int>		lst;
+	
 		PMergeMe();
 		PMergeMe(const PMergeMe &copy);
 		PMergeMe &operator= (const PMergeMe &copy);
