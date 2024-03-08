@@ -7,6 +7,7 @@
 #include <deque>
 #include <string>
 #include <cstdlib>
+#include <cmath>
 
 #define BEFORE 0
 #define AFTER 1
@@ -24,7 +25,7 @@ class PMergeMe
 		bool	is_number(const std::string &number);
 		void	merge_vec(std::vector< std::pair< int, int > > &before, int iter);
 		void	insert_vec(std::vector< std::pair< int, int > > &top, std::vector< std::pair< int, int > > &bot, int iter);
-
+		void	insert_odd(std::vector< std::pair< int, int > > &top, std::pair< int, int > &odd);
 
 	public:
 		PMergeMe(int ac, char **av);

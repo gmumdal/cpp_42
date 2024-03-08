@@ -68,27 +68,23 @@ void	PMergeMe::merge_insert_vec()
 	int	merge_size = vec.size() / 2;
 	std::pair< int, int >	odd = std::make_pair(-1, -1);
 	if (vec.size() % 2 == 1)
-		odd = std::make_pair(vec[vec.size() - 1], vec.size() - 1);
+		odd = std::make_pair(vec[vec.size() - 1], -1);
 	std::vector< std::pair< int, int > >	top;
 	std::vector< std::pair< int, int > >	bot;
 	int	i = 0;
+	int	index = 0;
 	while (merge_size--)
 	{
-		top.push_back(std::make_pair(vec[i + !(vec[i] > vec[i + 1])], i));
-		bot.push_back(std::make_pair(vec[i + (vec[i] > vec[i + 1])], i + 1));
+		top.push_back(std::make_pair(vec[i + !(vec[i] > vec[i + 1])], index++));
+		bot.push_back(std::make_pair(vec[i + (vec[i] > vec[i + 1])], -1));
 		i += 2;
 	}
 	merge_vec(top, 1);
-	insert_vec(top, bot, 1);
+	insert_vec(top, bot, 0);
+	if (odd.first > -1)
+		insert_odd(top, odd);
 	for (size_t j = 0; j < top.size(); j++)
 		vec[j] = top[j].first;
-	// for (size_t j = 0; j < top.size(); j++)
-	// {
-	// 	std::cout << "top number: " << top[j].first << "  top index: " << top[j].second << std::endl;
-	// 	std::cout << "bot number: " << bot[j].first << "  bot index: " << bot[j].second << std::endl;
-	// }
-	//	if (odd.first != -1)
-	//		std::cout << "odd: " << odd.first << std::endl;
 }
 
 void	PMergeMe::merge_vec(std::vector< std::pair< int, int > > &before, int iter)
@@ -110,10 +106,47 @@ void	PMergeMe::merge_vec(std::vector< std::pair< int, int > > &before, int iter)
 	}
 	merge_vec(top, iter + 1);
 	insert_vec(top, bot, iter);
+	if (odd.first > -1)
+		insert_odd(top, odd);
 	before = top;
 }
 
 void	PMergeMe::insert_vec(std::vector< std::pair< int, int > > &top, std::vector< std::pair< int, int > > &bot, int iter)
 {
+	for (size_t i = 0; i < bot.size(); i++)
+	{
+		int	check = top[i * 2].second / pow(2, iter);
+		int	st = 0;
+		int	en = i * 2;
+		while (st != en)
+		{
+			int	mid = st + en / 2;
+			if (top[mid].first > bot[check].first)
+				en = mid - 1;
+			else
+				st = mid + 1;
+		}
+		if (top[st].first > bot[check].first)
+			top.insert(top.begin() + st, bot[check]);
+		else
+			top.insert(top.begin() + st + 1, bot[check]);
+	}
+}
 
+void	PMergeMe::insert_odd(std::vector< std::pair< int, int > > &top, std::pair< int, int > &odd)
+{
+	int	st = 0;
+	int	en = top.size() - 1;
+	while (st != en)
+	{
+		int	mid = st + en / 2;
+		if (top[mid].first > odd.first)
+			en = mid - 1;
+		else
+			st = mid + 1;
+	}
+	if (top[st].first > odd.first)
+		top.insert(top.begin() + st, odd);
+	else
+		top.insert(top.begin() + st + 1, odd);
 }
