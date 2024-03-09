@@ -10,6 +10,7 @@ int	main(int ac, char **av)
 		PMergeMe	merge(ac, av);
 		merge.print_arr(BEFORE);
 		merge.merge_insert_vec();
+		merge.merge_insert_lst();
 		merge.print_arr(AFTER);
 	}
 	catch(const std::exception& e)

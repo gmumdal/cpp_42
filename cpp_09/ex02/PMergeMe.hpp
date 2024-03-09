@@ -13,25 +13,57 @@
 #define BEFORE 0
 #define AFTER 1
 
+typedef std::pair< int, int > Pair;
+
+template <typename T>
+class Tlist : public std::list<T>
+{
+	public:
+		Tlist() : std::list<T>() {}
+		~Tlist() {}
+		Tlist(const Tlist &copy) : std::list<T>(copy) {}
+		Tlist &operator= (const Tlist &copy)
+		{
+			*this = copy;
+			return (*this);
+		}
+		T	&operator[] (int idx)
+		{
+			typename std::list<T>::iterator it = this->begin();
+			std::advance(it, idx);
+			return (*it);
+		}
+		typename std::list<T>::iterator	iter(int idx)
+		{
+			typename std::list<T>::iterator it = this->begin();
+			std::advance(it, idx);
+			return (it);
+		}
+};
+
 class PMergeMe
 {
 	private:
 		std::vector<int>	vec;
-		std::list<int>		lst;
+		Tlist<int>		lst;
 	
 		PMergeMe();
 		PMergeMe(const PMergeMe &copy);
 		PMergeMe &operator= (const PMergeMe &copy);
 
 		bool	is_number(const std::string &number);
-		void	merge_vec(std::vector< std::pair< int, int > > &before, int iter);
-		void	insert_vec(std::vector< std::pair< int, int > > &top, std::vector< std::pair< int, int > > &bot, int iter);
-		void	insert_odd(std::vector< std::pair< int, int > > &top, std::pair< int, int > &odd);
+		void	merge_vec(std::vector< Pair > &before, int iter);
+		void	insert_vec(std::vector< Pair > &top, std::vector< Pair > &bot, int iter);
+		void	insert_vec_odd(std::vector< Pair > &top, Pair &odd);
+		void	merge_lst(Tlist< Pair > &before, int iter);
+		void	insert_lst(Tlist< Pair > &top, Tlist< Pair > &bot, int iter);
+		void	insert_lst_odd(Tlist< Pair > &top, Pair &odd);
 
 	public:
 		PMergeMe(int ac, char **av);
 		~PMergeMe();
 		void	merge_insert_vec();
+		void	merge_insert_lst();
 
 		void	print_arr(int state);
 };
