@@ -11,9 +11,7 @@ int	main(void)
 	iter(arr3, 10, func3<int>);
 
 	for (int i = 0; i < 10; i++)
-	{
 		std::cout << arr1[i] << ' ' << arr3[i] << std::endl;
-	}
 	iter(arr2, 10, func2<const char>);
 	std::cout << std::endl;
 }
