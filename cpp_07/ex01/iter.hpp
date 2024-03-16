@@ -5,7 +5,7 @@
 #include <iostream>
 
 template <typename T, typename F>
-void	iter(T *array, size_t length, F (*func)(T&))
+void	iter(T *array, size_t length, F func)
 {
 	if (array == NULL || func == NULL)
 		return ;

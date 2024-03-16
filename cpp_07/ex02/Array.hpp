@@ -9,8 +9,8 @@ template <typename T>
 class Array
 {
 	private:
-		T				*all;
-		unsigned int	length;
+		T		*all;
+		size_t	length;
 
 	public:
 		Array()
@@ -19,7 +19,7 @@ class Array
 			length = 0;
 			std::cout << "Array zero constructor called" << std::endl;
 		}
-		Array(unsigned int n)
+		Array(size_t n)
 		{
 			all = new T[n];
 			length = n;
@@ -34,7 +34,7 @@ class Array
 		{
 			length = copy.length;
 			all = new T[length];
-			for (unsigned int i = 0; i < length; i++)
+			for (size_t i = 0; i < length; i++)
 				all[i] = copy.all[i];
 			std::cout << "Array copy constructor called" << std::endl;
 		}
@@ -45,18 +45,24 @@ class Array
 			length = copy.length;
 			delete [] all;
 			all = new T[length];
-			for (unsigned int i = 0; i < length; i++)
+			for (size_t i = 0; i < length; i++)
 				all[i] = copy.all[i];
 			std::cout << "Array copy operator called" << std::endl;
 			return (*this);
 		}
-		unsigned int	size(void) const
+		size_t	size(void) const
 		{
 			return (length);
 		}
-		T &operator[] (int index)
+		T &operator[] (size_t index)
 		{
-			if (index < 0 || index >= (int)length)
+			if (index < 0 || index >= length)
+				throw std::out_of_range("index: out of bound");
+			return (all[index]);
+		}
+		const T &operator[] (size_t index) const
+		{
+			if (index < 0 || index >= length)
 				throw std::out_of_range("index: out of bound");
 			return (all[index]);
 		}
