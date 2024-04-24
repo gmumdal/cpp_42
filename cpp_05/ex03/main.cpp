@@ -10,7 +10,7 @@ int	main(void)
 {
 	try
 	{
-		Bureaucrat	bure1("bure_1", 150);
+		Bureaucrat	bure1("bure_1", 151);
 		Bureaucrat	bure2("bure_2", 1);
 		ShrubberyCreationForm	form1("form_1");
 		RobotomyRequestForm		form2("form_2");

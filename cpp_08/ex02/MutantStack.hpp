@@ -10,20 +10,16 @@ template <typename T, typename F = std::deque<T> >
 class MutantStack : public std::stack<T, F>
 {
 	public:
-		MutantStack() : std::stack<T, F>()
-		{
+		MutantStack() : std::stack<T, F>() {
 			std::cout << "MutantStack constructor called" << std::endl;
 		}
-		~MutantStack()
-		{
+		~MutantStack() {
 			std::cout << "MutantStack destructor called" << std::endl;
 		}
-		MutantStack(const MutantStack &copy) : std::stack<T, F> (copy)
-		{
+		MutantStack(const MutantStack &copy) : std::stack<T, F> (copy) {
 			std::cout << "MutantStack copy constructor called" << std::endl;
 		}
-		MutantStack &operator= (const MutantStack &copy)
-		{
+		MutantStack &operator= (const MutantStack &copy) {
 			if (this == &copy)
 				return (*this);
 			*this = copy;
@@ -37,38 +33,30 @@ class MutantStack : public std::stack<T, F>
 		typedef typename F::const_reverse_iterator const_reverse_iterator;
 		
 		//default
-		iterator	begin()
-		{
+		iterator	begin() {
 			return (this->c.begin());
 		}
-		iterator	end()
-		{
+		iterator	end() {
 			return (this->c.end());
 		}
-		const_iterator	begin() const
-		{
+		const_iterator	begin() const {
 			return (this->c.begin());
 		}
-		const_iterator	end() const
-		{
+		const_iterator	end() const {
 			return (this->c.end());
 		}
 		
 		//reverse
-		reverse_iterator	rbegin()
-		{
+		reverse_iterator	rbegin() {
 			return (this->c.rbegin());
 		}
-		reverse_iterator	rend()
-		{
+		reverse_iterator	rend() {
 			return (this->c.rend());
 		}
-		const_reverse_iterator	rbegin() const
-		{
+		const_reverse_iterator	rbegin() const {
 			return (this->c.rbegin());
 		}
-		const_reverse_iterator	rend() const
-		{
+		const_reverse_iterator	rend() const {
 			return (this->c.rend());
 		}
 };

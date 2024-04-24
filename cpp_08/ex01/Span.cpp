@@ -28,7 +28,7 @@ Span &Span::operator= (const Span &copy)
 	std::cout << "Span copy operator called" << std::endl;
 	return (*this);
 }
-
+// add 할때 중복이 있으면 예외
 void	Span::addNumber(int add)
 {
 	try
