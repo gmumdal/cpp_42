@@ -42,11 +42,25 @@ int	main(void)
 		//shrubbery creation
 
 		std::cout << "------------------------------" << std::endl;
-		AForm	*form4 = intern.makeForm("presidential pardon", "form_4");
-		AForm	*form5 = intern.makeForm("robotomy request", "form_5");
-		AForm	*form6 = intern.makeForm("shrubbery creation", "form_6");
-		AForm	*form7 = intern.makeForm("shrubbery creation", "form_7");
-
+		AForm	*form4 = 0;
+		AForm	*form5 = 0;
+		AForm	*form6 = 0;
+		AForm	*form7 = 0;
+		try
+		{
+			form4 = intern.makeForm("presidential pardon", "form_4");
+			form5 = intern.makeForm("robotomy request", "form_5");
+			form6 = intern.makeForm("shrubbery creation", "form_6");
+			form7 = intern.makeForm("shrubbery creation", "form_7");
+		}
+		catch(const std::exception& e)
+		{
+			delete form4;
+			delete form5;
+			delete form6;
+			delete form7;
+			throw;
+		}
 		bure2.executeForm(*form4);
 		bure2.executeForm(*form5);
 		bure2.executeForm(*form6);
