@@ -88,4 +88,5 @@ void	AForm::checkExec(Bureaucrat const & executor) const
 		throw (GradeTooLowException(executor.getName()));
 	if (sign == 0)
 		throw (SignException(name));
+	std::cout << executor.getName() << " executed " << getName() << std::endl;
 }

@@ -25,8 +25,8 @@ class AForm
 		AForm(const AForm &copy);
 
 		void			beSigned(const Bureaucrat &bureaucrat);
-		virtual void	execute(Bureaucrat const & executor) const = 0;
-		void			checkExec(Bureaucrat const & executor) const;
+		virtual void	execute(Bureaucrat const &executor) const = 0;
+		void			checkExec(Bureaucrat const &executor) const;
 
 		std::string	getName() const;
 		bool		getSign() const;

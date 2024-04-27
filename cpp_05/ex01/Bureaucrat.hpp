@@ -22,6 +22,8 @@ class Bureaucrat
 		~Bureaucrat();
 		Bureaucrat(const Bureaucrat &copy);
 
+		void	signForm(Form &form);
+		
 		std::string	getName(void) const;
 		int			getGrade(void) const;
 		void		incGrade(void);
@@ -37,8 +39,6 @@ class Bureaucrat
 			public:
 				GradeTooLowException(const std::string &_name);
 		};
-
-		void	signForm(Form &form);
 };
 
 std::ostream	&operator<< (std::ostream& os, const Bureaucrat &bureaucrat);

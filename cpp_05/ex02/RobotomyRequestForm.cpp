@@ -40,7 +40,7 @@ void	RobotomyRequestForm::execute(Bureaucrat const & executor) const
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << executor.getName() << " couldn’t execve " << getName() << " because ";
+		std::cerr << executor.getName() << " couldn’t exeute " << getName() << " because ";
 		std::cerr << e.what() << std::endl;
 	}
 }

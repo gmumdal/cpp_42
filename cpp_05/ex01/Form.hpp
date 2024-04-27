@@ -12,9 +12,9 @@ class Form
 {
 	private:
 		const std::string	name;
-		bool		sign;
-		const int	sign_grade;
-		const int	execute_grade;
+		bool				sign;
+		const int			sign_grade;
+		const int			execute_grade;
 
 		Form();
 		Form &operator= (const Form &copy);

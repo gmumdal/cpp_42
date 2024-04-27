@@ -19,7 +19,7 @@ class RobotomyRequestForm : public AForm
 		~RobotomyRequestForm();
 		RobotomyRequestForm(const RobotomyRequestForm &copy);
 
-		virtual void	execute(Bureaucrat const & executor) const;
+		virtual void	execute(Bureaucrat const &executor) const;
 };
 
 #endif

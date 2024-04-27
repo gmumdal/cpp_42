@@ -5,7 +5,7 @@ int	main(void)
 {
 	try
 	{
-		//Bureaucrat	bure1("bure_1", 151);
+		// Bureaucrat	bure1("bure_1", 151);
 		Bureaucrat	bure2("bure_2", 149);
 		Bureaucrat	bure3("bure_3", 1);
 

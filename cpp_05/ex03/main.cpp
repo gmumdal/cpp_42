@@ -10,7 +10,7 @@ int	main(void)
 {
 	try
 	{
-		Bureaucrat	bure1("bure_1", 151);
+		Bureaucrat	bure1("bure_1", 150);
 		Bureaucrat	bure2("bure_2", 1);
 		ShrubberyCreationForm	form1("form_1");
 		RobotomyRequestForm		form2("form_2");
@@ -42,10 +42,10 @@ int	main(void)
 		//shrubbery creation
 
 		std::cout << "------------------------------" << std::endl;
-		AForm	*form7 = intern.makeForm("shrubbery creationd", "form_7");
 		AForm	*form4 = intern.makeForm("presidential pardon", "form_4");
 		AForm	*form5 = intern.makeForm("robotomy request", "form_5");
 		AForm	*form6 = intern.makeForm("shrubbery creation", "form_6");
+		AForm	*form7 = intern.makeForm("shrubbery creation", "form_7");
 
 		bure2.executeForm(*form4);
 		bure2.executeForm(*form5);
@@ -61,9 +61,14 @@ int	main(void)
 		bure2.executeForm(*form6);
 		std::cout << "------------------------------" << std::endl;
 
+		bure2.signForm(*form7);
+		bure2.executeForm(*form7);
+		std::cout << "------------------------------" << std::endl;
+
 		delete form4;
 		delete form5;
 		delete form6;
+		delete form7;
 	}
 	catch(const std::exception& e)
 	{

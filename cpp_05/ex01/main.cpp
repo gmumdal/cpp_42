@@ -9,7 +9,7 @@ int	main(void)
 		Bureaucrat	bure1("bure_1", 150);
 		Bureaucrat	bure2("bure_2", 1);
 		Form		form1("form_1", 50, 50);
-		//Form		form2("form_2", 151, 50);
+		// Form		form2("form_2", 151, 50);
 
 		bure1.incGrade();
 		bure2.incGrade();

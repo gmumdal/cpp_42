@@ -24,7 +24,7 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm &cop
 	std::cout << "** Presidential copy constructor called **" << std::endl;
 }
 
-void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
+void	PresidentialPardonForm::execute(Bureaucrat const &executor) const
 {
 	try
 	{
@@ -33,7 +33,7 @@ void	PresidentialPardonForm::execute(Bureaucrat const & executor) const
 	}
 	catch(const std::exception& e)
 	{
-		std::cerr << executor.getName() << " couldn’t execve " << getName() << " because ";
+		std::cerr << executor.getName() << " couldn’t execute " << getName() << " because ";
 		std::cerr << e.what() << std::endl;
 	}
 }

@@ -52,9 +52,9 @@ AForm	*Intern::presidentialReturn(const std::string _name)
 AForm	*Intern::makeForm(std::string type, std::string name)
 {
 	AForm	*(Intern::*func[3])(const std::string _name);
-	func[0] = &Intern::ShrubberyReturn;
+	func[0] = &Intern::presidentialReturn;
 	func[1] = &Intern::robotomyReturn;
-	func[2] = &Intern::presidentialReturn;
+	func[2] = &Intern::ShrubberyReturn;
 	std::string types[3] = {"presidential pardon", "robotomy request", "shrubbery creation"};
 
 	for (int i = 0; i < 3; i++)
