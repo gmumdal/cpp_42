@@ -30,36 +30,38 @@ int ScalarConverter::checkType(const std::string &target)
 		return (FLOAT);
 	if (target == "inf" || target == "+inf" || target == "-inf" || target == "nan")
 		return (DOUBLE);
+
+	/* char check */
 	if (target[0] < '0' || target[0] > '9') 
 	{
 		if (target.size() == 1)
 			return (CHAR);
 		if ((target[0] != '-' && target[0] != '+') && target.size() > 1)
-			return (STR_ERROR);
+			return (STR_ERROR);	
 		else if ((target[0] == '-' || target[0] == '+') && (target[1] < '0' || target[1] > '9'))
 			return (STR_ERROR);
 	}
-	int	zom = 0;
-	int	f = 0;
+	bool zom = false;
+	bool f = false;
 	for (unsigned long i = 1; i < target.size(); i++)
 	{
 		if (target[i] < '0' || target[i] > '9')
 		{
-			if (target[i] == '.' && (i == target.size() - 1 || zom == 1))
+			if (target[i] == '.' && (i == target.size() - 1 || zom))
 				return (STR_ERROR);
 			else if (target[i] == '.')
-				zom++;
-			else if ((target[i] == 'f' && (i != target.size() - 1 || target[i - 1] == '.' || f == 1)))
+				zom = true;
+			else if ((target[i] == 'f' && (i != target.size() - 1 || target[i - 1] == '.' || f)))
 				return (STR_ERROR);
 			else if	(target[i] == 'f')
-				f++;
+				f = true;
 			else
 				return (STR_ERROR);
 		}
 	}
-	if (target.find(".") == std::string::npos && target.size() <= 19)
+	if (target.find(".") == std::string::npos && target.size() <= 10)
 		return (INT);
-	else if (target.find(".") == std::string::npos && target.size() > 19)
+	else if (target.find(".") == std::string::npos && target.size() > 10)
 		return (SIZE_ERROR);
 	if (target.find("f", 0) == std::string::npos)
 		return (DOUBLE);
@@ -85,7 +87,7 @@ void ScalarConverter::intConvert(const std::string &target)
 	double	d = static_cast<double>(i);
 
 	if (l > 2147483647 || l < -2147483648)
-		printConvert(c, i, f, d, NOINT);
+		sizeError(target);
 	else if (l > 127 || l < -128)
 		printConvert(c, i, f, d, NOCHAR);
 	else
@@ -129,7 +131,7 @@ void ScalarConverter::strError(const std::string &target)
 
 void ScalarConverter::sizeError(const std::string &target)
 {
-	std::cout << "size error: \"" << target << "\"" << std::endl;
+	std::cout << "Invalid Type: \"" << target << "\"" << std::endl;
 }
 
 void	ScalarConverter::printConvert(char c, int i, float f, double d, int check)

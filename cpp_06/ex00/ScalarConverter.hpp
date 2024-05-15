@@ -23,7 +23,6 @@ class ScalarConverter
 		~ScalarConverter();
 		ScalarConverter(const ScalarConverter &copy);
 		ScalarConverter &operator=(const ScalarConverter &copy);
-		
 
 	public:
 		static int checkType(const std::string &target);
@@ -35,6 +34,7 @@ class ScalarConverter
 		static void strError(const std::string &target);
 		static void sizeError(const std::string &target);
 		static void	printConvert(char c, int i, float f, double d, int check);
+
 };
 
 #endif

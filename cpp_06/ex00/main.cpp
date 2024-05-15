@@ -6,7 +6,7 @@ int main(int ac, char **av)
 	if (ac != 2)
 		return (0);
     void (*converter[7])(const std::string &target) = {
-        0, &ScalarConverter::charConvert,
+        NULL, &ScalarConverter::charConvert,
         &ScalarConverter::intConvert, &ScalarConverter::floatConvert,
         &ScalarConverter::doubleConvert, &ScalarConverter::strError, &ScalarConverter::sizeError};
 	
