@@ -5,16 +5,16 @@
 #include <iostream>
 
 template <typename T>
-void	swap(T &first, T &second)
+void swap(T &first, T &second)
 {
-	T	tmp = first;
+	T tmp = first;
 
 	first = second;
 	second = tmp;
 }
 
 template <typename T>
-const T	&min(const T &first, const T &second)
+T min(T &first, T &second)
 {
 	if (first < second)
 		return (first);
@@ -23,7 +23,7 @@ const T	&min(const T &first, const T &second)
 }
 
 template <typename T>
-const T	&max(const T &first, const T &second)
+T max(T &first, T &second)
 {
 	if (first > second)
 		return (first);

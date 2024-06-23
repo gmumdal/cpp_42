@@ -13,16 +13,14 @@ class Array
 		size_t	length;
 
 	public:
-		Array()
+		Array() : length(0)
 		{
-			all = new T();
-			length = 0;
+			all = new T[0];
 			std::cout << "Array zero constructor called" << std::endl;
 		}
-		Array(size_t n)
+		Array(size_t n) : length(n)
 		{
 			all = new T[n];
-			length = n;
 			std::cout << "Array n constructor called" << std::endl;
 		}
 		~Array()
@@ -30,9 +28,8 @@ class Array
 			delete [] all;
 			std::cout << "Array destructor called" << std::endl;
 		}
-		Array(const Array &copy)
+		Array(const Array &copy) : length(copy.length)
 		{
-			length = copy.length;
 			all = new T[length];
 			for (size_t i = 0; i < length; i++)
 				all[i] = copy.all[i];

@@ -5,6 +5,7 @@
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
+    const Array<int> number(MAX_VAL);
     int* mirror = new int[MAX_VAL];
     srand(time(NULL));
     for (int i = 0; i < MAX_VAL; i++)
@@ -13,12 +14,25 @@ int main(int, char**)
         numbers[i] = value;
         mirror[i] = value;
     }
-    //SCOPE
+    //deep copy check
     {
         Array<int> tmp = numbers;
         Array<int> test(tmp);
+        try {
+            for (int i = 0; i < MAX_VAL; i++) {
+                const int value = rand();
+                tmp[i] = value;
+                test[i] = value;
+                if (tmp[i] == numbers[i] || test[i] == numbers[i]) {
+                    throw std::logic_error("copy array modify original array!");
+                }
+            }
+            std::cout << "deep copy ok!" << std::endl;
+        }
+        catch (const std::exception& e) {
+            std::cerr << e.what() << '\n';
+        }
     }
-
     for (int i = 0; i < MAX_VAL; i++)
     {
         if (mirror[i] != numbers[i])
@@ -43,11 +57,11 @@ int main(int, char**)
     {
         std::cerr << e.what() << '\n';
     }
-
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();
     }
-    delete [] mirror;//
+    std::cout << "const check : " << number[0] << std::endl;
+    delete [] mirror;
     return 0;
 }
