@@ -34,3 +34,36 @@ int main()
 	std::stack<int> s(mstack);
 	return 0;
 }
+
+// int main()
+// {
+// 	std::list<int> lst;
+// 	lst.push_back(5);
+// 	lst.push_back(17);
+// 	std::cout << lst.front() << std::endl;
+// 	lst.pop_back();
+// 	std::cout << lst.size() << std::endl;
+// 	lst.push_back(3);
+// 	lst.push_back(5);
+// 	lst.push_back(737);
+// 	//[...]
+// 	lst.push_back(0);
+// 	std::list<int>::iterator it = lst.begin();
+// 	std::list<int>::iterator ite = lst.end();
+// 	std::list<int>::const_reverse_iterator rit = lst.rbegin();
+// 	std::list<int>::const_reverse_iterator rite = lst.rend();
+// 	++it;
+// 	--it;
+// 	while (it != ite)
+// 	{
+// 		std::cout << *it << std::endl;
+// 		++it;
+// 	}
+// 	std::cout << "--------------------------" << std::endl;
+// 	while (rit != rite)
+// 	{
+// 		std::cout << *rit << std::endl;
+// 		++rit;
+// 	}
+// 	return 0;
+// }
