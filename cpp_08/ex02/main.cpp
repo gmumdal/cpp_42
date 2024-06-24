@@ -38,7 +38,7 @@ int main()
 	std::cout << "--------------------------" << std::endl;
 	std::stack<int> s(mstack);
 	while (s.size() != 0) {
-		std::cout << "pop : " << s.top() << std::endl;
+		std::cout << "s.pop : " << s.top() << std::endl;
 		s.pop();
 	}
 	return 0;
