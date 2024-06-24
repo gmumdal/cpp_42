@@ -16,9 +16,9 @@
 // }
 
 template <typename T>
-typename T::iterator	easyfind(T container, int find)
+typename T::iterator easyfind(T container, int find)
 {
-	typename T::iterator	it = std::find(container.begin(), container.end(), find);
+	typename T::iterator it = std::find(container.begin(), container.end(), find);
 	if (it == container.end())
 		throw std::logic_error("Cannot find value.");
 	return (it);

@@ -11,7 +11,7 @@
 class Span
 {
 	private:
-		std::set<int>	mset;
+		std::multiset<int>	mset;
 		unsigned int	n;
 		Span();
 
@@ -21,31 +21,27 @@ class Span
 		Span(const Span &copy);
 		Span &operator= (const Span &copy);
 	
-		void	addNumber(int add);
-		int		shortestSpan() const;
-		int		longestSpan() const;
+		void addNumber(int add);
+		int	shortestSpan() const;
+		int	longestSpan() const;
 
 		template <typename T>
-		void	addNumbers(T &container)
+		void addNumbers(T &container)
 		{
+			std::cout << "Insert " << container.size() << " numbers" << std::endl;
 			try
 			{
-				typename T::iterator	iter = container.begin();
-				while (42)
-				{
-					if (mset.size() == n)
-						throw std::logic_error("error : Span already full!");
-					if (iter == container.end())
-						break ;
-					mset.insert(*iter++);
-					if (mset.size() % 1000 == 0)
-						std::cout << "Span size " << mset.size() << std::endl;
+				if (container.size() > n - mset.size()) {
+					mset.insert(container.begin(), container.begin() + n - mset.size());
+					throw std::logic_error("error : container is bigger than size!");
 				}
+				mset.insert(container.begin(), container.end());
 			}
 			catch(const std::exception& e)
 			{
 				std::cerr << e.what() << '\n';
 			}
+			std::cout << "Span volume " << mset.size() << "/" << n << std::endl;
 		}
 };
 
