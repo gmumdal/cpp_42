@@ -10,8 +10,9 @@
 class BitcoinExchange : public std::map<std::string, double>
 {
 	private:
-		bool	is_number(std::string value);
-		bool	is_correct_date(std::string date);
+		bool isNumber(std::string value);
+		bool isPositive(std::string value);
+		bool isCorrectDate(std::string date);
 
 	public:
 		BitcoinExchange();
@@ -19,8 +20,8 @@ class BitcoinExchange : public std::map<std::string, double>
 		BitcoinExchange(const BitcoinExchange &copy);
 		BitcoinExchange &operator= (const BitcoinExchange &copy);
 
-		void	init(std::string data);
-		void	exchange(std::string file);
+		void init(std::string data);
+		void exchange(std::string file);
 };
 
 #endif
