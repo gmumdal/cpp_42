@@ -83,15 +83,15 @@ void PMergeMe::mergeInsertVec()
 		bot.push_back(std::make_pair(vec[i + (vec[i] > vec[i + 1])], -1));
 		i += 2;
 	}
-	mergeVec(top, 1);
-	insertVec(top, bot, 0);
+	merge(top, 1);
+	insert(top, bot, 0);
 	if (odd.first > -1)
-		insertVecOdd(top, odd);
+		insertOdd(top, odd);
 	for (size_t j = 0; j < top.size(); j++)
 		vec[j] = top[j].first;
 }
 
-void	PMergeMe::mergeVec(std::vector< Pair > &before, int iter)
+void PMergeMe::merge(std::vector< Pair > &before, int iter)
 {
 	if (before.size() == 1)
 		return ;
@@ -108,14 +108,14 @@ void	PMergeMe::mergeVec(std::vector< Pair > &before, int iter)
 		bot.push_back(before[i + (before[i].first > before[i + 1].first)]);
 		i += 2;
 	}
-	mergeVec(top, iter + 1);
-	insertVec(top, bot, iter);
+	merge(top, iter + 1);
+	insert(top, bot, iter);
 	if (odd.first > -1)
-		insertVecOdd(top, odd);
+		insertOdd(top, odd);
 	before = top;
 }
 
-void PMergeMe::insertVec(std::vector< Pair > &top, std::vector< Pair > &bot, int iter)
+void PMergeMe::insert(std::vector< Pair > &top, std::vector< Pair > &bot, int iter)
 {
 	std::vector<Pair> sorted_arr = top;
 	sorted_arr.insert(sorted_arr.begin(), bot[top[0].second/static_cast<int>(pow(2, iter))]);
@@ -128,29 +128,14 @@ void PMergeMe::insertVec(std::vector< Pair > &top, std::vector< Pair > &bot, int
 			if (jacob_n > top.size()) 
 				jacob_n = top.size();
 			Pair value = bot[top[jacob_n - 1].second/static_cast<int>(pow(2, iter))];
-			sorted_arr = binarySearchVec(sorted_arr, 0, jacob_n + insert_cnt - 2, value);
+			binarySearch(sorted_arr, 0, jacob_n + insert_cnt - 2, value);
 			insert_cnt++;
 		}
 	}
 	top = sorted_arr;
 }
 
-std::vector< Pair > PMergeMe::binarySearchVec(std::vector<Pair> &arr, int start, int end, Pair &value) {
-	while (start < end) {
-		int mid = (start + end) / 2;
-		if (arr[mid].first > value.first)
-			end = mid - 1;
-		else
-			start = mid + 1;
-	}
-	if (arr[start].first > value.first)
-		arr.insert(arr.begin() + start, value);
-	else
-		arr.insert(arr.begin() + start + 1, value);
-	return (arr);
-}
-
-void PMergeMe::insertVecOdd(std::vector< Pair > &top, Pair &odd)
+void PMergeMe::insertOdd(std::vector< Pair > &top, Pair &odd)
 {
 	int	start = 0;
 	int	end = top.size() - 1;
@@ -166,6 +151,20 @@ void PMergeMe::insertVecOdd(std::vector< Pair > &top, Pair &odd)
 		top.insert(top.begin() + start, odd);
 	else
 		top.insert(top.begin() + start + 1, odd);
+}
+
+void PMergeMe::binarySearch(std::vector<Pair> &arr, int start, int end, Pair &value) {
+	while (start < end) {
+		int mid = (start + end) / 2;
+		if (arr[mid].first > value.first)
+			end = mid - 1;
+		else
+			start = mid + 1;
+	}
+	if (arr[start].first > value.first)
+		arr.insert(arr.begin() + start, value);
+	else
+		arr.insert(arr.begin() + start + 1, value);
 }
 
 void PMergeMe::mergeInsertLst()
@@ -184,15 +183,15 @@ void PMergeMe::mergeInsertLst()
 		bot.push_back(std::make_pair(lst[i + (lst[i] > lst[i + 1])], -1));
 		i += 2;
 	}
-	mergeLst(top, 1);
-	insertLst(top, bot, 0);
+	merge(top, 1);
+	insert(top, bot, 0);
 	if (odd.first > -1)
-		insertLstOdd(top, odd);
+		insertOdd(top, odd);
 	for (size_t j = 0; j < top.size(); j++)
 		lst[j] = top[j].first;
 }
 
-void PMergeMe::mergeLst(Tlist< Pair > &before, int iter)
+void PMergeMe::merge(Tlist< Pair > &before, int iter)
 {
 	if (before.size() == 1)
 		return ;
@@ -209,15 +208,15 @@ void PMergeMe::mergeLst(Tlist< Pair > &before, int iter)
 		bot.push_back(before[i + (before[i].first > before[i + 1].first)]);
 		i += 2;
 	}
-	mergeLst(top, iter + 1);
-	insertLst(top, bot, iter);
+	merge(top, iter + 1);
+	insert(top, bot, iter);
 	if (odd.first > -1)
-		insertLstOdd(top, odd);
+		insertOdd(top, odd);
 	for (size_t j = 0; j < top.size(); j++)
 		before[j] = top[j];
 }
 
-void PMergeMe::insertLst(Tlist< Pair > &top, Tlist< Pair > &bot, int iter)
+void PMergeMe::insert(Tlist< Pair > &top, Tlist< Pair > &bot, int iter)
 {
 	Tlist<Pair> sorted_arr = top;
 	sorted_arr.insert(sorted_arr.begin(), bot[top[0].second/static_cast<int>(pow(2, iter))]);
@@ -230,29 +229,14 @@ void PMergeMe::insertLst(Tlist< Pair > &top, Tlist< Pair > &bot, int iter)
 			if (jacob_n > top.size()) 
 				jacob_n = top.size();
 			Pair value = bot[top[jacob_n - 1].second/static_cast<int>(pow(2, iter))];
-			sorted_arr = binarySearchLst(sorted_arr, 0, jacob_n + insert_cnt - 2, value);
+			binarySearch(sorted_arr, 0, jacob_n + insert_cnt - 2, value);
 			insert_cnt++;
 		}
 	}
 	top = sorted_arr;
 }
 
-Tlist< Pair > PMergeMe::binarySearchLst(Tlist<Pair> &arr, int start, int end, Pair &value) {
-	while (start < end) {
-		int mid = (start + end) / 2;
-		if (arr[mid].first > value.first)
-			end = mid - 1;
-		else
-			start = mid + 1;
-	}
-	if (arr[start].first > value.first)
-		arr.insert(arr.iter(start), value);
-	else
-		arr.insert(arr.iter(start + 1), value);
-	return (arr);
-}
-
-void PMergeMe::insertLstOdd(Tlist< Pair > &top, Pair &odd)
+void PMergeMe::insertOdd(Tlist< Pair > &top, Pair &odd)
 {
 	int	start = 0;
 	int	end = top.size() - 1;
@@ -268,4 +252,18 @@ void PMergeMe::insertLstOdd(Tlist< Pair > &top, Pair &odd)
 		top.insert(top.iter(start), odd);
 	else
 		top.insert(top.iter(start + 1), odd);
+}
+
+void PMergeMe::binarySearch(Tlist<Pair> &arr, int start, int end, Pair &value) {
+	while (start < end) {
+		int mid = (start + end) / 2;
+		if (arr[mid].first > value.first)
+			end = mid - 1;
+		else
+			start = mid + 1;
+	}
+	if (arr[start].first > value.first)
+		arr.insert(arr.iter(start), value);
+	else
+		arr.insert(arr.iter(start + 1), value);
 }

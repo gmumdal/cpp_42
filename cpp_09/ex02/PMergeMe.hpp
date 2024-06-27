@@ -54,15 +54,15 @@ class PMergeMe
 		bool isNumber(const std::string &number);
 		size_t jacobsthalNum(size_t n);
 
-		void mergeVec(std::vector< Pair > &before, int iter);
-		void insertVec(std::vector< Pair > &top, std::vector< Pair > &bot, int iter);
-		void insertVecOdd(std::vector< Pair > &top, Pair &odd);
-		std::vector< Pair > binarySearchVec(std::vector<Pair> &arr, int start, int end, Pair &value);
+		void merge(std::vector< Pair > &before, int iter);
+		void insert(std::vector< Pair > &top, std::vector< Pair > &bot, int iter);
+		void insertOdd(std::vector< Pair > &top, Pair &odd);
+		void binarySearch(std::vector<Pair> &arr, int start, int end, Pair &value);
 
-		void mergeLst(Tlist< Pair > &before, int iter);
-		void insertLst(Tlist< Pair > &top, Tlist< Pair > &bot, int iter);
-		void insertLstOdd(Tlist< Pair > &top, Pair &odd);
-		Tlist< Pair > binarySearchLst(Tlist<Pair> &arr, int start, int end, Pair &value);
+		void merge(Tlist< Pair > &before, int iter);
+		void insert(Tlist< Pair > &top, Tlist< Pair > &bot, int iter);
+		void insertOdd(Tlist< Pair > &top, Pair &odd);
+		void binarySearch(Tlist<Pair> &arr, int start, int end, Pair &value);
 
 
 	public:
