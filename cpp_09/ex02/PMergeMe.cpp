@@ -19,7 +19,7 @@ PMergeMe::PMergeMe(int ac, char **av)
 	for (int i = 1; i < ac; i++)
 	{
 		if (isNumber(av[i]) == false)
-			throw std::logic_error("Error: not a number: " + std::string(av[i]));
+			throw std::logic_error("Error: not a positive number: " + std::string(av[i]));
 		long long number = atol(av[i]);
 		if (number > 2147483647)
 			throw std::logic_error("Error: too large number: " + std::string(av[i]));
@@ -51,24 +51,28 @@ size_t PMergeMe::jacobsthalNum(size_t n) {
 void PMergeMe::printArr(int state)
 {
 	/* origin */
-	// if (state == BEFORE)
-	// 	std::cout << "before: ";
-	// if (state == AFTER)
-	// 	std::cout << "after: ";
+	if (state == BEFORE)
+		std::cout << "Before: ";
+	if (state == AFTER)
+		std::cout << "After:  ";
 	// for (size_t i = 0; i < vec.size() - 1; i++)
 	// 	std::cout << vec[i] << ' ';
-	// std::cout << vec[vec.size() -1] << std::endl;
+	for (size_t i = 0; i < lst.size() - 1; i++)
+		std::cout << lst[i] << ' ';
+	std::cout << vec[vec.size() -1] << std::endl;
 
 	/* test */
-	(void)state;
-	std::cout << "------ vector, deque ------" << std::endl;
-	for (size_t i = 0; i < vec.size(); i++)
-		std::cout << "vec[" << i << "] : " << vec[i] << "  |  "
-		<< "lst[" << i << "] : " << lst[i] << std::endl;
+	// (void)state;
+	// std::cout << "------ vector, deque ------" << std::endl;
+	// for (size_t i = 0; i < vec.size(); i++)
+	// 	std::cout << "vec[" << i << "] : " << vec[i] << "  |  "
+	// 	<< "lst[" << i << "] : " << lst[i] << std::endl;
 }
 
 void PMergeMe::mergeInsertVec()
 {
+	if (vec.size() == 1)
+		return ;
 	int	merge_size = vec.size() / 2;
 	Pair odd = std::make_pair(-1, -1);
 	if (vec.size() % 2 == 1)
@@ -169,6 +173,8 @@ void PMergeMe::binarySearch(std::vector<Pair> &arr, int start, int end, Pair &va
 
 void PMergeMe::mergeInsertLst()
 {
+	if (lst.size() == 1)
+		return ;
 	int	merge_size = lst.size() / 2;
 	Pair odd = std::make_pair(-1, -1);
 	if (lst.size() % 2 == 1)

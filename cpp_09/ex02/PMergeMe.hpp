@@ -9,6 +9,7 @@
 #include <cstdlib>
 #include <cmath>
 #include <list>
+#include <ctime>
 
 #define BEFORE 0
 #define AFTER 1
