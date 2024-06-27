@@ -27,7 +27,7 @@ class Tlist : public std::list<T>
 			this->assign(copy.begin(), copy.end());
 			return (*this);
 		}
-		T	&operator[] (int idx)
+		T &operator[] (int idx)
 		{
 			typename std::list<T>::iterator it = this->begin();
 			std::advance(it, idx);
@@ -44,32 +44,34 @@ class Tlist : public std::list<T>
 class PMergeMe
 {
 	private:
-		std::vector<int>	vec;
-		Tlist<int>		lst;
+		std::vector<int> vec;
+		Tlist<int> lst;
 	
 		PMergeMe();
 		PMergeMe(const PMergeMe &copy);
 		PMergeMe &operator= (const PMergeMe &copy);
 
-		bool is_number(const std::string &number);
-		size_t jacobsthal_num(size_t n);
-		void merge_vec(std::vector< Pair > &before, int iter);
-		void insert_vec(std::vector< Pair > &top, std::vector< Pair > &bot, int iter);
-		void insert_vec_odd(std::vector< Pair > &top, Pair &odd);
-		std::vector< Pair > binary_search_vec(std::vector<Pair> arr, int start, int end, Pair value);
-		void merge_lst(Tlist< Pair > &before, int iter);
-		void insert_lst(Tlist< Pair > &top, Tlist< Pair > &bot, int iter);
-		void insert_lst_odd(Tlist< Pair > &top, Pair &odd);
-		Tlist< Pair > binary_search_lst(Tlist<Pair> arr, int start, int end, Pair value);
+		bool isNumber(const std::string &number);
+		size_t jacobsthalNum(size_t n);
+
+		void mergeVec(std::vector< Pair > &before, int iter);
+		void insertVec(std::vector< Pair > &top, std::vector< Pair > &bot, int iter);
+		void insertVecOdd(std::vector< Pair > &top, Pair &odd);
+		std::vector< Pair > binarySearchVec(std::vector<Pair> &arr, int start, int end, Pair &value);
+
+		void mergeLst(Tlist< Pair > &before, int iter);
+		void insertLst(Tlist< Pair > &top, Tlist< Pair > &bot, int iter);
+		void insertLstOdd(Tlist< Pair > &top, Pair &odd);
+		Tlist< Pair > binarySearchLst(Tlist<Pair> &arr, int start, int end, Pair &value);
 
 
 	public:
 		PMergeMe(int ac, char **av);
 		~PMergeMe();
-		void merge_insert_vec();
-		void merge_insert_lst();
+		void mergeInsertVec();
+		void mergeInsertLst();
 
-		void print_arr(int state);
+		void printArr(int state);
 };
 
 #endif
