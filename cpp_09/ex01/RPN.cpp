@@ -3,11 +3,11 @@
 
 RPN::RPN() {}
 
-RPN::RPN(const RPN &copy) : std::stack< double, std::deque<double> >(copy) {}
+RPN::RPN(const RPN &copy) : std::stack< double >(copy) {}
 
 RPN &RPN::operator= (const RPN &copy)
 {
-	*this = copy;
+	this->result = copy.result;
 	return (*this);
 }
 
@@ -15,8 +15,8 @@ RPN::RPN(std::string str)
 {
 	std::string number = "0123456789";
 	std::string	oper = "+-*/";
-	double	tmp1;
-	double	tmp2;
+	double tmp1;
+	double tmp2;
 
 	for (size_t i = 0; i < str.size(); i++)
 	{

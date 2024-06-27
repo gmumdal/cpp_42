@@ -7,10 +7,10 @@
 #include <deque>
 #include <string>
 
-class RPN : public std::stack< double, std::deque<double> >
+class RPN : public std::stack< double >
 {
 	private:
-		double	result;
+		double result;
 		RPN();
 		RPN(const RPN &copy);
 		RPN &operator= (const RPN &copy);
@@ -18,7 +18,7 @@ class RPN : public std::stack< double, std::deque<double> >
 	public:
 		RPN(std::string str);
 		~RPN();
-		double	getResult() const;
+		double getResult() const;
 };
 
 #endif
