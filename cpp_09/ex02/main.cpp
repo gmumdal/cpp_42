@@ -7,7 +7,7 @@ int	main(int ac, char **av)
 	{
 		if (ac == 1)
 			throw std::logic_error("Error: argument fail");
-		PMergeMe	merge(ac, av);
+		PMergeMe merge(ac, av);
 		merge.print_arr(BEFORE);
 		merge.merge_insert_vec();
 		merge.merge_insert_lst();

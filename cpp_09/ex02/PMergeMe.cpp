@@ -44,6 +44,10 @@ bool	PMergeMe::is_number(const std::string &number)
 	return (true);
 }
 
+size_t PMergeMe::jacobsthal_num(size_t n) {
+    return ((pow(2, n) - pow(-1, n)) / 3);
+}
+
 void	PMergeMe::print_arr(int state)
 {
 	/* origin */
@@ -111,29 +115,42 @@ void	PMergeMe::merge_vec(std::vector< Pair > &before, int iter)
 	before = top;
 }
 
-void	PMergeMe::insert_vec(std::vector< Pair > &top, std::vector< Pair > &bot, int iter)
+void PMergeMe::insert_vec(std::vector< Pair > &top, std::vector< Pair > &bot, int iter)
 {
-	for (size_t i = 0; i < bot.size(); i++)
-	{
-		int	check = top[i * 2].second / pow(2, iter);
-		int	st = 0;
-		int	en = i * 2;
-		while (st < en)
-		{
-			int	mid = (st + en) / 2;
-			if (top[mid].first > bot[check].first)
-				en = mid - 1;
-			else
-				st = mid + 1;
+	std::vector<Pair> sorted_arr = top;
+	sorted_arr.insert(sorted_arr.begin(), bot[top[0].second/static_cast<int>(pow(2, iter))]);
+	size_t insert_cnt = 1;
+	std::vector<size_t> jacobsthalArr;
+	for (size_t i = 1; jacobsthal_num(i) < top.size(); i++)
+		jacobsthalArr.push_back(jacobsthal_num(i + 1));
+	for (size_t j = 1; j < jacobsthalArr.size(); j++) {
+		for (size_t jacob_n = jacobsthalArr[j]; jacob_n > jacobsthalArr[j - 1]; jacob_n--) {
+			if (jacob_n > top.size()) 
+				jacob_n = top.size();
+			Pair value = bot[top[jacob_n - 1].second/static_cast<int>(pow(2, iter))];
+			sorted_arr = binary_search_vec(sorted_arr, 0, jacob_n + insert_cnt - 2, value);
+			insert_cnt++;
 		}
-		if (top[st].first > bot[check].first)
-			top.insert(top.begin() + st, bot[check]);
-		else
-			top.insert(top.begin() + st + 1, bot[check]);
 	}
+	top = sorted_arr;
 }
 
-void	PMergeMe::insert_vec_odd(std::vector< Pair > &top, Pair &odd)
+std::vector< Pair > PMergeMe::binary_search_vec(std::vector<Pair> arr, int start, int end, Pair value) {
+	while (start < end) {
+		int mid = (start + end) / 2;
+		if (arr[mid].first > value.first)
+			end = mid - 1;
+		else
+			start = mid + 1;
+	}
+	if (arr[start].first > value.first)
+		arr.insert(arr.begin() + start, value);
+	else
+		arr.insert(arr.begin() + start + 1, value);
+	return (arr);
+}
+
+void PMergeMe::insert_vec_odd(std::vector< Pair > &top, Pair &odd)
 {
 	int	st = 0;
 	int	en = top.size() - 1;
@@ -200,42 +217,55 @@ void	PMergeMe::merge_lst(Tlist< Pair > &before, int iter)
 		before[j] = top[j];
 }
 
-void	PMergeMe::insert_lst(Tlist< Pair > &top, Tlist< Pair > &bot, int iter)
+void PMergeMe::insert_lst(Tlist< Pair > &top, Tlist< Pair > &bot, int iter)
 {
-	for (size_t i = 0; i < bot.size(); i++)
-	{
-		int	check = top[i * 2].second / pow(2, iter);
-		int	st = 0;
-		int	en = i * 2;
-		while (st < en)
-		{
-			int	mid = (st + en) / 2;
-			if (top[mid].first > bot[check].first)
-				en = mid - 1;
-			else
-				st = mid + 1;
+	Tlist<Pair> sorted_arr = top;
+	sorted_arr.insert(sorted_arr.begin(), bot[top[0].second/static_cast<int>(pow(2, iter))]);
+	size_t insert_cnt = 1;
+	Tlist<size_t> jacobsthalArr;
+	for (size_t i = 1; jacobsthal_num(i) < top.size(); i++)
+		jacobsthalArr.push_back(jacobsthal_num(i + 1));
+	for (size_t j = 1; j < jacobsthalArr.size(); j++) {
+		for (size_t jacob_n = jacobsthalArr[j]; jacob_n > jacobsthalArr[j - 1]; jacob_n--) {
+			if (jacob_n > top.size()) 
+				jacob_n = top.size();
+			Pair value = bot[top[jacob_n - 1].second/static_cast<int>(pow(2, iter))];
+			sorted_arr = binary_search_lst(sorted_arr, 0, jacob_n + insert_cnt - 2, value);
+			insert_cnt++;
 		}
-		if (top[st].first > bot[check].first)
-			top.insert(top.iter(st), bot[check]);
-		else
-			top.insert(top.iter(st + 1), bot[check]);
 	}
+	top = sorted_arr;
+}
+
+Tlist< Pair > PMergeMe::binary_search_lst(Tlist<Pair> arr, int start, int end, Pair value) {
+	while (start < end) {
+		int mid = (start + end) / 2;
+		if (arr[mid].first > value.first)
+			end = mid - 1;
+		else
+			start = mid + 1;
+	}
+	if (arr[start].first > value.first)
+		arr.insert(arr.iter(start), value);
+	else
+		arr.insert(arr.iter(start + 1), value);
+	return (arr);
 }
 
 void	PMergeMe::insert_lst_odd(Tlist< Pair > &top, Pair &odd)
 {
-	int	st = 0;
-	int	en = top.size() - 1;
-	while (st < en)
+	int	start = 0;
+	int	end = top.size() - 1;
+	while (start < end)
 	{
-		int	mid = (st + en) / 2;
+		int	mid = (start + end) / 2;
 		if (top[mid].first > odd.first)
-			en = mid - 1;
+			end = mid - 1;
 		else
-			st = mid + 1;
+			start = mid + 1;
 	}
-	if (top[st].first > odd.first)
-		top.insert(top.iter(st), odd);
+	if (top[start].first > odd.first)
+		top.insert(top.iter(start), odd);
 	else
-		top.insert(top.iter(st + 1), odd);
+		top.insert(top.iter(start + 1), odd);
 }

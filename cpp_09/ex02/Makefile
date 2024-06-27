@@ -1,4 +1,4 @@
-NAME = pmergeme
+NAME = PMergeMe
 SRCS = main.cpp PMergeMe.cpp
 INCS = PMergeMe.hpp
 INC_DIR = -I ./
