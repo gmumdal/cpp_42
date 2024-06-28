@@ -1,5 +1,5 @@
 
-#include "PMergeMe.hpp"
+#include "PmergeMe.hpp"
 
 #include <sys/time.h>
 
@@ -11,7 +11,7 @@ int	main(int ac, char **av)
 	{
 		if (ac == 1)
 			throw std::logic_error("Error: argument fail");
-		PMergeMe merge(ac, av);
+		PmergeMe merge(ac, av);
 		merge.printArr(BEFORE);
 		start = clock();
 		merge.mergeInsertVec();

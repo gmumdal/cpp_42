@@ -1,20 +1,20 @@
 
-#include "PMergeMe.hpp"
+#include "PmergeMe.hpp"
 
-PMergeMe::PMergeMe() {}
+PmergeMe::PmergeMe() {}
 
-PMergeMe::PMergeMe(const PMergeMe &copy)
+PmergeMe::PmergeMe(const PmergeMe &copy)
 {
 	(void)copy;
 }
 
-PMergeMe &PMergeMe::operator= (const PMergeMe &copy)
+PmergeMe &PmergeMe::operator= (const PmergeMe &copy)
 {
 	(void)copy;
 	return (*this);
 }
 
-PMergeMe::PMergeMe(int ac, char **av)
+PmergeMe::PmergeMe(int ac, char **av)
 {
 	for (int i = 1; i < ac; i++)
 	{
@@ -26,15 +26,15 @@ PMergeMe::PMergeMe(int ac, char **av)
 		vec.push_back(number);
 		lst.push_back(number);
 	}
-	std::cout << "PMergeMe constructor called" << std::endl;
+	std::cout << "PmergeMe constructor called" << std::endl;
 }
 
-PMergeMe::~PMergeMe()
+PmergeMe::~PmergeMe()
 {
-	std::cout << "PMergeMe destructor called" << std::endl;
+	std::cout << "PmergeMe destructor called" << std::endl;
 }
 
-bool PMergeMe::isNumber(const std::string &number)
+bool PmergeMe::isNumber(const std::string &number)
 {
 	if (number.size() == 0)
 		return false;
@@ -46,11 +46,11 @@ bool PMergeMe::isNumber(const std::string &number)
 	return true;
 }
 
-size_t PMergeMe::jacobsthalNum(size_t n) {
+size_t PmergeMe::jacobsthalNum(size_t n) {
     return ((pow(2, n) - pow(-1, n)) / 3);
 }
 
-void PMergeMe::printArr(int state)
+void PmergeMe::printArr(int state)
 {
 	/* origin */
 	if (state == BEFORE)
@@ -71,7 +71,7 @@ void PMergeMe::printArr(int state)
 	// 	<< "lst[" << i << "] : " << lst[i] << std::endl;
 }
 
-void PMergeMe::mergeInsertVec()
+void PmergeMe::mergeInsertVec()
 {
 	if (vec.size() == 1)
 		return ;
@@ -97,7 +97,7 @@ void PMergeMe::mergeInsertVec()
 		vec[j] = top[j].first;
 }
 
-void PMergeMe::merge(std::vector< Pair > &before, int iter)
+void PmergeMe::merge(std::vector< Pair > &before, int iter)
 {
 	if (before.size() == 1)
 		return ;
@@ -121,7 +121,7 @@ void PMergeMe::merge(std::vector< Pair > &before, int iter)
 	before = top;
 }
 
-void PMergeMe::insert(std::vector< Pair > &top, std::vector< Pair > &bot, int iter)
+void PmergeMe::insert(std::vector< Pair > &top, std::vector< Pair > &bot, int iter)
 {
 	std::vector<Pair> sorted_arr = top;
 	sorted_arr.insert(sorted_arr.begin(), bot[top[0].second/static_cast<int>(pow(2, iter))]);
@@ -141,7 +141,7 @@ void PMergeMe::insert(std::vector< Pair > &top, std::vector< Pair > &bot, int it
 	top = sorted_arr;
 }
 
-void PMergeMe::insertOdd(std::vector< Pair > &top, Pair &odd)
+void PmergeMe::insertOdd(std::vector< Pair > &top, Pair &odd)
 {
 	int	start = 0;
 	int	end = top.size() - 1;
@@ -159,7 +159,7 @@ void PMergeMe::insertOdd(std::vector< Pair > &top, Pair &odd)
 		top.insert(top.begin() + start + 1, odd);
 }
 
-void PMergeMe::binarySearch(std::vector<Pair> &arr, int start, int end, Pair &value) {
+void PmergeMe::binarySearch(std::vector<Pair> &arr, int start, int end, Pair &value) {
 	while (start < end) {
 		int mid = (start + end) / 2;
 		if (arr[mid].first > value.first)
@@ -173,7 +173,7 @@ void PMergeMe::binarySearch(std::vector<Pair> &arr, int start, int end, Pair &va
 		arr.insert(arr.begin() + start + 1, value);
 }
 
-void PMergeMe::mergeInsertLst()
+void PmergeMe::mergeInsertLst()
 {
 	if (lst.size() == 1)
 		return ;
@@ -199,7 +199,7 @@ void PMergeMe::mergeInsertLst()
 		lst[j] = top[j].first;
 }
 
-void PMergeMe::merge(Tlist< Pair > &before, int iter)
+void PmergeMe::merge(Tlist< Pair > &before, int iter)
 {
 	if (before.size() == 1)
 		return ;
@@ -224,7 +224,7 @@ void PMergeMe::merge(Tlist< Pair > &before, int iter)
 		before[j] = top[j];
 }
 
-void PMergeMe::insert(Tlist< Pair > &top, Tlist< Pair > &bot, int iter)
+void PmergeMe::insert(Tlist< Pair > &top, Tlist< Pair > &bot, int iter)
 {
 	Tlist<Pair> sorted_arr = top;
 	sorted_arr.insert(sorted_arr.begin(), bot[top[0].second/static_cast<int>(pow(2, iter))]);
@@ -244,7 +244,7 @@ void PMergeMe::insert(Tlist< Pair > &top, Tlist< Pair > &bot, int iter)
 	top = sorted_arr;
 }
 
-void PMergeMe::insertOdd(Tlist< Pair > &top, Pair &odd)
+void PmergeMe::insertOdd(Tlist< Pair > &top, Pair &odd)
 {
 	int	start = 0;
 	int	end = top.size() - 1;
@@ -262,7 +262,7 @@ void PMergeMe::insertOdd(Tlist< Pair > &top, Pair &odd)
 		top.insert(top.iter(start + 1), odd);
 }
 
-void PMergeMe::binarySearch(Tlist<Pair> &arr, int start, int end, Pair &value) {
+void PmergeMe::binarySearch(Tlist<Pair> &arr, int start, int end, Pair &value) {
 	while (start < end) {
 		int mid = (start + end) / 2;
 		if (arr[mid].first > value.first)

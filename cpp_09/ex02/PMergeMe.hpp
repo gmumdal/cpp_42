@@ -42,15 +42,15 @@ class Tlist : public std::list<T>
 		}
 };
 
-class PMergeMe
+class PmergeMe
 {
 	private:
 		std::vector<int> vec;
 		Tlist<int> lst;
 	
-		PMergeMe();
-		PMergeMe(const PMergeMe &copy);
-		PMergeMe &operator= (const PMergeMe &copy);
+		PmergeMe();
+		PmergeMe(const PmergeMe &copy);
+		PmergeMe &operator= (const PmergeMe &copy);
 
 		bool isNumber(const std::string &number);
 		size_t jacobsthalNum(size_t n);
@@ -67,8 +67,8 @@ class PMergeMe
 
 
 	public:
-		PMergeMe(int ac, char **av);
-		~PMergeMe();
+		PmergeMe(int ac, char **av);
+		~PmergeMe();
 		void mergeInsertVec();
 		void mergeInsertLst();
 
