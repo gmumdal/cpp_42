@@ -19,10 +19,10 @@ PMergeMe::PMergeMe(int ac, char **av)
 	for (int i = 1; i < ac; i++)
 	{
 		if (isNumber(av[i]) == false)
-			throw std::logic_error("Error: not a positive number: " + std::string(av[i]));
+			throw std::logic_error("Error: not a positive number: \'" + std::string(av[i]) + "\'");
 		long long number = atol(av[i]);
 		if (number > 2147483647)
-			throw std::logic_error("Error: too large number: " + std::string(av[i]));
+			throw std::logic_error("Error: too large number: \'" + std::string(av[i]) + "\'");
 		vec.push_back(number);
 		lst.push_back(number);
 	}
@@ -36,12 +36,14 @@ PMergeMe::~PMergeMe()
 
 bool PMergeMe::isNumber(const std::string &number)
 {
+	if (number.size() == 0)
+		return false;
 	for (size_t i = 0; i < number.size(); i++)
 	{
 		if (number[i] < '0' || number[i] > '9')
-			return (false);
+			return false;
 	}
-	return (true);
+	return true;
 }
 
 size_t PMergeMe::jacobsthalNum(size_t n) {

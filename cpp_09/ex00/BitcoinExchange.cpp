@@ -35,11 +35,11 @@ void BitcoinExchange::init(std::string data)
 	while (std::getline(db, buf))
 	{
 		if (buf.find(',', 0) == std::string::npos)
-			throw std::logic_error("Error: The data is incorrect => " + buf);
+			throw std::logic_error("Error: bad input => \'" + buf + "\'");
 		std::string	tmp_key = buf.substr(0, buf.find(',', 0));
 		std::string	tmp_value = buf.substr(buf.find(',', 0) + 1, buf.size() - buf.find(',', 0));
 		if (!isCorrectDate(tmp_key) || !isNumber(tmp_value))
-				throw std::logic_error("Error: The data is incorrect => " + buf);
+			throw std::logic_error("Error: bad input => \'" + buf + "\'");
 		insert(std::make_pair(tmp_key, strtod(tmp_value.c_str(), NULL)));
 	}
 	db.close();
@@ -59,22 +59,22 @@ void BitcoinExchange::exchange(std::string file)
 			if (buf.size() == 0)
 				continue ;
 			if (buf.find('|', 0) == std::string::npos)
-				throw std::logic_error("Error: bad input => " + buf);
-			std::string find_key = buf.substr(0, buf.find('|', 0) - 1);
-			std::string check_value = buf.substr(buf.find('|', 0) + 2, buf.size());
+				throw std::logic_error("Error: bad input => \'" + buf + "\'");
+			std::string find_key = buf.substr(0, buf.find(" | ", 0));
+			std::string check_value = buf.substr(buf.find(" | ", 0) + 3, buf.size());
 			if (!isCorrectDate(find_key)) {
-				throw std::logic_error("Error: incorrect date => " + find_key);
+				throw std::logic_error("Error: bad input => \'" + buf + "\'");
 			} else if (!isNumber(check_value) && !isPositive(check_value)) {
 				throw std::logic_error("Error: not a positive number.");
 			} else if (!isNumber(check_value)) {
-				throw std::logic_error("Error: incorrect value => " + check_value);
+				throw std::logic_error("Error: bad input => \'" + buf + "\'");
 			}
 			iterator it = find(find_key);
 			if (it == end())
 			{
 				it = lower_bound(find_key);
 				if (it == begin())
-					throw std::logic_error("Error: incorrect date => " + find_key);
+					throw std::logic_error("Error: bad input => \'" + buf + "\'");
 				it--;
 			}
 			double value = strtod(check_value.c_str(), NULL);
@@ -92,6 +92,8 @@ void BitcoinExchange::exchange(std::string file)
 
 bool BitcoinExchange::isNumber(std::string value)
 {
+	if (value.size() == 0)
+		return false;
 	size_t i;
 	bool zom = false;
 	for (i = 0; i < value.size(); i++)
@@ -101,15 +103,14 @@ bool BitcoinExchange::isNumber(std::string value)
 		else if (value[i] == '.' && i != value.size() - 1 && i != 0 && zom == false)
 			zom = true;
 		else
-			return (false);
+			return false;
 	}
-	return (true);
+	return true;
 }
 
 bool BitcoinExchange::isPositive(std::string value)
 {
-	double test = strtod(value.c_str(), NULL);
-	return test >= 0;
+	return strtod(value.c_str(), NULL) >= 0;
 }
 
 bool BitcoinExchange::isCorrectDate(std::string date)
@@ -144,7 +145,7 @@ bool BitcoinExchange::isCorrectDate(std::string date)
 		else
 			return (false);
 	}
-	else if (day > max_day[month])
+	else if (month < 0 || month > 12 || day < 0 || day > max_day[month])
 		return (false);
 	return (true);
 }
