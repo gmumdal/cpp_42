@@ -29,18 +29,37 @@ void BitcoinExchange::init(std::string data)
 {
 	std::ifstream db(data.c_str());
 	if (!db.is_open())
-		throw std::logic_error("Error : The database doesn't exist.");
+		throw std::logic_error("Error: invalid datebase");
 	std::string	buf;
-	std::getline(db, buf);
+	while (std::getline(db, buf)) {
+		if (buf.size() == 0) {
+			continue ;
+		}
+		std::istringstream iss(buf);
+		std::string key;
+		std::string value;
+		std::getline(iss >> std::ws, key, ',');
+		std::getline(iss >> std::ws, value, ' ');
+		if (key == "date" && value == "exchange_rate") {
+			break ;
+		}
+		throw std::logic_error("Error: invalid datebase");
+	}
 	while (std::getline(db, buf))
 	{
-		if (buf.find(',', 0) == std::string::npos)
-			throw std::logic_error("Error: bad input => \"" + buf + "\"");
-		std::string	tmp_key = buf.substr(0, buf.find(',', 0));
-		std::string	tmp_value = buf.substr(buf.find(',', 0) + 1, buf.size() - buf.find(',', 0));
-		if (!isCorrectDate(tmp_key) || !isNumber(tmp_value))
-			throw std::logic_error("Error: bad input => \"" + buf + "\"");
-		insert(std::make_pair(tmp_key, strtod(tmp_value.c_str(), NULL)));
+		if (buf.size() == 0) {
+			continue ;
+		}
+		std::istringstream iss(buf);
+		std::string key;
+		std::string value;
+		std::getline(iss >> std::ws, key, ',');
+		std::getline(iss >> std::ws, value, ' ');
+		if (!isCorrectDate(key) || !isNumber(value))
+			throw std::logic_error("Error: bad input => " + buf);
+		std::pair<iterator, bool> ret = insert(std::make_pair(key, strtod(value.c_str(), NULL)));
+		if (ret.second == 0)
+			throw std::logic_error("dupulicate data : " + key);
 	}
 	db.close();
 }
@@ -51,38 +70,49 @@ void BitcoinExchange::exchange(std::string file)
 	if (!input.is_open())
 		throw std::logic_error("Error : could not open file.");
 	std::string	buf;
-	std::getline(input, buf);
+	while (std::getline(input, buf)) {
+		if (buf.size() == 0) {
+			continue ;
+		}
+		std::istringstream iss(buf);
+		std::string key;
+		std::string delimeter;
+		std::string value;
+		iss >> key >> delimeter >> value;
+		if (key == "date" && delimeter == "|" && value == "value") {
+			break ;
+		}
+		throw std::logic_error("Error: invalid input");
+	}
 	while (std::getline(input, buf))
 	{
 		try
 		{
-			if (buf.size() == 0)
+			if (buf.size() == 0) {
 				continue ;
-			if (buf.find('|', 0) == std::string::npos)
-				throw std::logic_error("Error: bad input => \"" + buf + "\"");
-			std::string find_key = buf.substr(0, buf.find(" | ", 0));
-			std::string check_value = buf.substr(buf.find(" | ", 0) + 3, buf.size());
-			if (!isCorrectDate(find_key)) {
-				throw std::logic_error("Error: bad input => \"" + buf + "\"");
-			} else if (!isNumber(check_value) && !isPositive(check_value)) {
-				throw std::logic_error("Error: not a positive number.");
-			} else if (!isNumber(check_value)) {
-				throw std::logic_error("Error: bad input => \"" + buf + "\"");
 			}
-			iterator it = find(find_key);
-			if (it == end())
-			{
-				it = lower_bound(find_key);
-				if (it == begin())
-					throw std::logic_error("Error: bad input => \"" + buf + "\"");
-				it--;
+			std::istringstream iss(buf);
+			std::string key;
+			std::string delimeter;
+			std::string value;
+			iss >> key >> delimeter >> value;
+			if (key.size() != 10 || delimeter != "|") {
+				throw std::logic_error("Error: bad input => " + buf);
+			} if (!isCorrectDate(key)) {
+				throw std::logic_error("Error: bad input => " + buf);
+			} else if (!isNumber(value)) {
+				throw std::logic_error("Error: bad input => " + buf);
 			}
-			double value = strtod(check_value.c_str(), NULL);
-			if (value > 1000)
+			iterator it = upper_bound(key);
+			if (it == begin())
+				throw std::logic_error("Error: bad input => " + buf);
+			it--;
+			double real_value = strtod(value.c_str(), NULL);
+			if (real_value > 1000)
 				throw std::logic_error("Error: too large a number.");
-			std::cout << find_key << " => " << check_value << " = " << value * it->second << std::endl;
+			std::cout << key << " => " << real_value << " = " << real_value * it->second << std::endl;
 		}
-		catch(const std::exception& e)
+		catch (const std::exception& e)
 		{
 			std::cout << e.what() << std::endl;
 		}
@@ -108,11 +138,6 @@ bool BitcoinExchange::isNumber(std::string value)
 	return true;
 }
 
-bool BitcoinExchange::isPositive(std::string value)
-{
-	return strtod(value.c_str(), NULL) >= 0;
-}
-
 bool BitcoinExchange::isCorrectDate(std::string date)
 {
 	int	year;
@@ -120,16 +145,13 @@ bool BitcoinExchange::isCorrectDate(std::string date)
 	int	day;
 	int	max_day[13] = {0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
-	if (date.size() != 10)
-		return (false);
-	for (int i = 0; i < 10; i++)
-	{
-		if ((i == 4 || i == 7) && date[i] == '-')
-			continue ;
-		else if (i == 4 || i == 7)
-			return (false);
-		else if (date[i] < '0' || date[i] > '9')
-			return (false);
+	for (int i = 0; i < 10; i++) {
+		if (date[i] < '0' || date[i] > '9') {
+			if ((i == 4 || i == 7) && date[i] == '-') {
+				continue ;
+			}
+			return false;
+		}
 	}
 	year = strtod(date.substr(0, 4).c_str(), NULL);
 	month = strtod(date.substr(5, 2).c_str(), NULL);
@@ -137,15 +159,15 @@ bool BitcoinExchange::isCorrectDate(std::string date)
 	if (month == 2 && day == 29)
 	{
 		if (year % 400 == 0)
-			return (true);
+			return true;
 		else if (year % 100 == 0)
-			return (false);
+			return false;
 		else if (year % 4 == 0)
-			return (true);
+			return true;
 		else
-			return (false);
+			return false;
 	}
-	else if (month < 0 || month > 12 || day < 0 || day > max_day[month])
-		return (false);
-	return (true);
+	else if (month > 0 && month <= 12 && day > 0 && day <= max_day[month])
+		return true;
+	return false;
 }

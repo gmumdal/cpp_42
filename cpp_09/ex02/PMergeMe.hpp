@@ -58,20 +58,20 @@ class PmergeMe
 		void merge(std::vector< Pair > &before, int iter);
 		void insert(std::vector< Pair > &top, std::vector< Pair > &bot, int iter);
 		void insertOdd(std::vector< Pair > &top, Pair &odd);
-		void binarySearch(std::vector<Pair> &arr, int start, int end, Pair &value);
+		void binarySearch(std::vector< Pair > &arr, int start, int end, Pair &value);
 
 		void merge(Tlist< Pair > &before, int iter);
 		void insert(Tlist< Pair > &top, Tlist< Pair > &bot, int iter);
 		void insertOdd(Tlist< Pair > &top, Pair &odd);
-		void binarySearch(Tlist<Pair> &arr, int start, int end, Pair &value);
+		void binarySearch(Tlist< Pair > &arr, int start, int end, Pair &value);
 
 
 	public:
 		PmergeMe(int ac, char **av);
 		~PmergeMe();
+
 		void mergeInsertVec();
 		void mergeInsertLst();
-
 		void printArr(int state);
 };
 

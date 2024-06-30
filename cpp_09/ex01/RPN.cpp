@@ -15,30 +15,32 @@ RPN::RPN(std::string str)
 {
 	std::string number = "0123456789";
 	std::string	oper = "+-*/";
-	double tmp1;
-	double tmp2;
+	std::istringstream iss(str);
+	std::string buffer;
 
-	for (size_t i = 0; i < str.size(); i++)
+	while (std::getline(iss, buffer, ' '))
 	{
-		if (str[i] == ' ')
+		if (buffer.size() == 0)
 			continue ;
-		if (number.find(str[i]) != std::string::npos)
-			push(str[i] - '0');
-		else if (oper.find(str[i]) != std::string::npos)
+		if (buffer.size() > 1)
+			throw std::logic_error("Error: invaild argument : " + buffer);
+		if (number.find(buffer[0]) != std::string::npos)
+			push(buffer[0] - '0');
+		else if (oper.find(buffer[0]) != std::string::npos)
 		{
 			if (size() < 2)
-				throw std::logic_error("Error");
-			tmp2 = top();
+				throw std::logic_error("Error: invaild argument : " + buffer);
+			double tmp2 = top();
 			pop();
-			tmp1 = top();
+			double tmp1 = top();
 			pop();
-			if (str[i] == '+')
+			if (buffer[0] == oper[0])
 				push(tmp1 + tmp2);
-			else if (str[i] == '-')
+			else if (buffer[0] == oper[1])
 				push(tmp1 - tmp2);
-			else if (str[i] == '*')
+			else if (buffer[0] == oper[2])
 				push(tmp1 * tmp2);
-			else if (str[i] == '/')
+			else if (buffer[0] == oper[3])
 			{
 				if (tmp2 == 0)
 					throw std::logic_error("Error: division by Zero");

@@ -78,7 +78,7 @@ void PmergeMe::mergeInsertVec()
 	int	merge_size = vec.size() / 2;
 	Pair odd = std::make_pair(-1, -1);
 	if (vec.size() % 2 == 1)
-		odd = std::make_pair(vec[vec.size() - 1], -1);
+		odd.first = vec[vec.size() - 1];
 	std::vector< Pair >	top;
 	std::vector< Pair >	bot;
 	int	i = 0;
@@ -180,7 +180,7 @@ void PmergeMe::mergeInsertLst()
 	int	merge_size = lst.size() / 2;
 	Pair odd = std::make_pair(-1, -1);
 	if (lst.size() % 2 == 1)
-		odd = std::make_pair(lst[lst.size() - 1], -1);
+		odd.first = lst[lst.size() - 1];
 	Tlist< Pair > top;
 	Tlist< Pair > bot;
 	int	i = 0;

@@ -3,9 +3,11 @@
 #define BITCOIN_EXCHANGE_HPP
 
 #include <iostream>
+#include <sstream>
 #include <fstream>
 #include <map>
 #include <cstdlib>
+#include <cctype>
 
 class BitcoinExchange : public std::map<std::string, double>
 {

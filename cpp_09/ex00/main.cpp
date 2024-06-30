@@ -11,10 +11,10 @@ int	main(int ac, char **av)
 		btc.init("data.csv");
 		btc.exchange(av[1]);
 	}
-	catch(const std::exception& e)
+	catch (const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
-	}	
+	}
 	return (0);
 }
 
