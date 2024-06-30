@@ -57,10 +57,10 @@ void PmergeMe::printArr(int state)
 		std::cout << "Before: ";
 	if (state == AFTER)
 		std::cout << "After:  ";
-	// for (size_t i = 0; i < vec.size() - 1; i++)
-	// 	std::cout << vec[i] << ' ';
-	for (size_t i = 0; i < lst.size() - 1; i++)
-		std::cout << lst[i] << ' ';
+	for (size_t i = 0; i < vec.size() - 1; i++)
+		std::cout << vec[i] << ' ';
+	// for (size_t i = 0; i < lst.size() - 1; i++)
+	// 	std::cout << lst[i] << ' ';
 	std::cout << vec[vec.size() -1] << std::endl;
 
 	/* test */
@@ -131,7 +131,7 @@ void PmergeMe::insert(std::vector< Pair > &top, std::vector< Pair > &bot, int it
 		jacobsthal_arr.push_back(jacobsthalNum(i + 1));
 	for (size_t j = 1; j < jacobsthal_arr.size(); j++) {
 		for (size_t jacob_n = jacobsthal_arr[j]; jacob_n > jacobsthal_arr[j - 1]; jacob_n--) {
-			if (jacob_n > top.size()) 
+			if (jacob_n > top.size())
 				jacob_n = top.size();
 			Pair value = bot[top[jacob_n - 1].second/static_cast<int>(pow(2, iter))];
 			binarySearch(sorted_arr, 0, jacob_n + insert_cnt - 2, value);

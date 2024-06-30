@@ -108,7 +108,7 @@ void BitcoinExchange::exchange(std::string file)
 				throw std::logic_error("Error: bad input => " + buf);
 			it--;
 			double real_value = strtod(value.c_str(), NULL);
-			if (real_value > 1000)
+			if (real_value > 1000.0)
 				throw std::logic_error("Error: too large a number.");
 			std::cout << key << " => " << real_value << " = " << real_value * it->second << std::endl;
 		}
