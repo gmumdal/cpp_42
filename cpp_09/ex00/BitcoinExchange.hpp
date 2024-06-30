@@ -3,6 +3,7 @@
 #define BITCOIN_EXCHANGE_HPP
 
 #include <iostream>
+#include <algorithm>
 #include <sstream>
 #include <fstream>
 #include <map>
